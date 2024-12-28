@@ -18,7 +18,7 @@ function App() {
       <div className="mx-4 sm:mx-[10%]">
         <ToastContainer />
         <Routes>
-          <Route path="/Doc-Time/" element={<GettingStarted />} />
+          <Route path="/" element={<GettingStarted />} />
           <Route path="/Doc-Time/home" element={<Home />} />
           <Route path="/Doc-Time/doctors" element={<Doctors />} />
           <Route path="/Doc-Time/doctors/:speciality" element={<Doctors />} />
