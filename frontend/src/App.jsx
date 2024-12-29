@@ -18,16 +18,16 @@ function App() {
       <div className="mx-4 sm:mx-[10%]">
         <ToastContainer />
         <Routes>
-          <Route path="/Doc-Time/" element={<GettingStarted />} />
-          <Route path="/Doc-Time/home" element={<Home />} />
-          <Route path="/Doc-Time/doctors" element={<Doctors />} />
-          <Route path="/Doc-Time/doctors/:speciality" element={<Doctors />} />
-          <Route path="/Doc-Time/login" element={<Login />} />
-          <Route path="/Doc-Time/about" element={<About />} />
-          <Route path="/Doc-Time/contact" element={<Contact />} />
-          <Route path="/Doc-Time/my-profile" element={<MyProile />} />
-          <Route path="/Doc-Time/my-appointments" element={<MyAppointments />} />
-          <Route path="/Doc-Time/appointment/:docId" element={<Appointment />} />
+          <Route path="/" element={<GettingStarted />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/doctors" element={<Doctors />} />
+          <Route path="/doctors/:speciality" element={<Doctors />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/my-profile" element={<MyProile />} />
+          <Route path="/my-appointments" element={<MyAppointments />} />
+          <Route path="/appointment/:docId" element={<Appointment />} />
         </Routes>
       </div>
     </div>

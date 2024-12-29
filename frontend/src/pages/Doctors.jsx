@@ -45,8 +45,8 @@ const Doctors = () => {
           <p
             onClick={() =>
               speciality === "General physician"
-                ? navigate("/Doc-Time/doctors")
-                : navigate("/Doc-Time/doctors/General physician")
+                ? navigate("/doctors")
+                : navigate("/doctors/General physician")
             }
             className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 dark:border-gray-500 rounded transition-all cursor-pointer  ${
               speciality === "General physician"
@@ -59,8 +59,8 @@ const Doctors = () => {
           <p
             onClick={() =>
               speciality === "Gynecologist"
-                ? navigate("/Doc-Time/doctors")
-                : navigate("/Doc-Time/doctors/Gynecologist")
+                ? navigate("/doctors")
+                : navigate("/doctors/Gynecologist")
             }
             className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 dark:border-gray-500 rounded transition-all cursor-pointer  ${
               speciality === "Gynecologist"
@@ -73,8 +73,8 @@ const Doctors = () => {
           <p
             onClick={() =>
               speciality === "Dermatologist"
-                ? navigate("/Doc-Time/doctors")
-                : navigate("/Doc-Time/doctors/Dermatologist")
+                ? navigate("/doctors")
+                : navigate("/doctors/Dermatologist")
             }
             className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 dark:border-gray-500 rounded transition-all cursor-pointer  ${
               speciality === "Dermatologist"
@@ -87,8 +87,8 @@ const Doctors = () => {
           <p
             onClick={() =>
               speciality === "Pediatricians"
-                ? navigate("/Doc-Time/doctors")
-                : navigate("/Doc-Time/doctors/Pediatricians")
+                ? navigate("/doctors")
+                : navigate("/doctors/Pediatricians")
             }
             className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 dark:border-gray-500 rounded transition-all cursor-pointer  ${
               speciality === "Pediatricians"
@@ -101,8 +101,8 @@ const Doctors = () => {
           <p
             onClick={() =>
               speciality === "Neurologist"
-                ? navigate("/Doc-Time/doctors")
-                : navigate("/Doc-Time/doctors/Neurologist")
+                ? navigate("/doctors")
+                : navigate("/doctors/Neurologist")
             }
             className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 dark:border-gray-500 rounded transition-all cursor-pointer  ${
               speciality === "Neurologist"
@@ -115,8 +115,8 @@ const Doctors = () => {
           <p
             onClick={() =>
               speciality === "Gastroenterologist"
-                ? navigate("/Doc-Time/doctors")
-                : navigate("/Doc-Time/doctors/Gastroenterologist")
+                ? navigate("/doctors")
+                : navigate("/doctors/Gastroenterologist")
             }
             className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 dark:border-gray-500 rounded transition-all cursor-pointer  ${
               speciality === "Gastroenterologist"
@@ -130,7 +130,7 @@ const Doctors = () => {
         <div className="w-full grid grid-cols-auto gap-4 gap-y-6">
           {filterDoc.map((item, index) => (
             <div
-              onClick={() => navigate(`/Doc-Time/appointment/${item._id}`)}
+              onClick={() => navigate(`/appointment/${item._id}`)}
               className="border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500"
               key={index}
             >

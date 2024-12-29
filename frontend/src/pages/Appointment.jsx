@@ -89,7 +89,7 @@ const Appointment = () => {
 
         if (!token) {
             toast.warning('Login to book appointment')
-            return navigate('/Doc-Time/login')
+            return navigate('/login')
         }
 
         const date = docSlots[slotIndex][0].datetime
@@ -106,7 +106,7 @@ const Appointment = () => {
             if (data.success) {
                 toast.success(data.message)
                 getDoctosData()
-                navigate('/Doc-Time/my-appointments')
+                navigate('/my-appointments')
             } else {
                 toast.error(data.message)
             }
