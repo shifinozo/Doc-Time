@@ -46,7 +46,7 @@ const Login = () => {
 
   useEffect(() => {
     if (token) {
-      navigate('/home')
+      navigate('/Doc-Time/home')
     }
   }, [token])
 

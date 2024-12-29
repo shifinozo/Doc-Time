@@ -112,7 +112,7 @@ function LottieAnimation() {
   </div>
 
   {active === 3 ? (
-    <Link to="/home">
+    <Link to="/Doc-Time/home">
       <Button variant="text" className="flex items-center gap-2 min-w-[100px] dark:text-white"> {/* Added min-width here as well */}
         Finish
         <FaArrowRight strokeWidth={2} className="h-4 w-4 dark:text-white" />

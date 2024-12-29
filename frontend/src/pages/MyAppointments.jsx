@@ -71,7 +71,7 @@ const MyAppointments = () => {
                 try {
                     const { data } = await axios.post(backendUrl + "/api/user/verifyRazorpay", response, { headers: { token } });
                     if (data.success) {
-                        navigate('/my-appointments')
+                        navigate('/Doc-Time/my-appointments')
                         getUserAppointments()
                     }
                 } catch (error) {
