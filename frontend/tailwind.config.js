@@ -10,7 +10,7 @@ export default withMT({
   theme: {
     extend: {
       colors: {
-        primary: "#5f6fff",
+        primary: "#0D7DFF",
       },
       gridTemplateColumns: {
         auto: "repeat(auto-fill, minmax(200px, 1fr))",
