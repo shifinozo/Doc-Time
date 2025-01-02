@@ -94,7 +94,7 @@ function LottieAnimation() {
       )}
 
       {/* Navigation Buttons */}
-      <div className="flex justify-center w-full max-w-lg px-4 mt-8">
+      <div className="flex justify-evenly w-full max-w-lg px-4 mt-8">
   <Button
     variant="text"
     className="flex items-center gap-2 min-w-[100px] dark:text-white" // Added min-width to prevent shrinking
@@ -105,14 +105,14 @@ function LottieAnimation() {
     Prev
   </Button>
 
-  <div className="flex items-center gap-2 ">
+  <div className="flex items-center justify-between gap-6">
     <IconButton {...getItemProps(1)}>1</IconButton>
     <IconButton {...getItemProps(2)}>2</IconButton>
     <IconButton {...getItemProps(3)}>3</IconButton>
   </div>
 
   {active === 3 ? (
-    <Link to="/Doc-Time/home">
+    <Link to="/home">
       <Button variant="text" className="flex items-center gap-2 min-w-[100px] dark:text-white"> {/* Added min-width here as well */}
         Finish
         <FaArrowRight strokeWidth={2} className="h-4 w-4 dark:text-white" />

@@ -15,24 +15,18 @@ const SpecialityMenu = () => {
         Search Your Doctor and Book Appointment in one click
       </p>
       <div className="flex items-center gap-2 ">
-  <div className="md:flex-1 md:max-w-xs md:w-80">
-    <Input 
-      label="Search" 
-      className="text-center" 
-    />
-  </div>
-  <Button 
-    className="w-16  md:w-20 flex items-center justify-center bg-primary" 
-  >
-    Search
-  </Button>
-</div>
-
+        <div className="md:flex-1 md:max-w-xs md:w-80">
+          <Input label="Search" className="text-center" />
+        </div>
+        <Button className="w-16  md:w-20 flex items-center justify-center bg-primary">
+          Search
+        </Button>
+      </div>
 
       <div className="flex sm:justify-center gap-4 pt-5 w-full overflow-scroll ">
         {specialityData.map((item, index) => (
           <Link
-            to={`/Doc-Time/doctors/${item.speciality}`}
+            to={`/doctors/${item.speciality}`}
             onClick={() => scrollTo(0, 0)}
             className="flex flex-col items-center text-xs cursor-pointer flex-shrink-0 hover:translate-y-[-10px] transition-all duration-500"
             key={index}
