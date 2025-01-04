@@ -31,7 +31,7 @@ export default function BottomNavBar() {
                   ? "bg-primary text-white hover:bg-primary mt-[-5px]" // Always applies to `/doctors`
                   : isActive
                   ? "text-primary " // Applies to other active links
-                  : "bg-transparent text-black " // Inactive state
+                  : "bg-transparent text-gray-800 " // Inactive state
               }`}
               variant="text"
             >

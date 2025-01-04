@@ -1,8 +1,8 @@
 import React from "react";
 import Lottie from "lottie-react";
-import Doctor from "../../public/Lottie/Doctor.json";
-import Doctor2 from "../../public/Lottie/Doctor2.json";
-import Doctor3 from "../../public/Lottie/Doctor3.json";
+import Animation1 from "../../public/Lottie/Animation1.json";
+import Animation2 from "../../public/Lottie/Animation2.json";
+import Animation3 from "../../public/Lottie/Animation3.json";
 import { Button, Typography, IconButton } from "@material-tailwind/react";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -32,7 +32,7 @@ function LottieAnimation() {
         <>
           <Lottie
             className="w-full max-w-xs sm:max-w-md lg:max-w-lg md:h-[70%]"
-            animationData={Doctor}
+            animationData={Animation1}
           />
           <Typography
             className="mt-0 text-center text-gray-600 dark:text-gray-300 text-base sm:text-lg lg:text-xl"
@@ -54,7 +54,7 @@ function LottieAnimation() {
         <>
           <Lottie
             className="w-full max-w-xs sm:max-w-md lg:max-w-lg md:h-[70%]"
-            animationData={Doctor2}
+            animationData={Animation2}
           />
           <Typography
             className="mt-0 text-center text-gray-700 dark:text-gray-300 text-base sm:text-lg lg:text-xl"
@@ -76,7 +76,7 @@ function LottieAnimation() {
         <>
           <Lottie
             className="w-full max-w-xs sm:max-w-md lg:max-w-lg md:h-[70%]"
-            animationData={Doctor3}
+            animationData={Animation3}
           />
           <Typography
             className="mt-0 text-center text-gray-700 dark:text-gray-300 text-base sm:text-lg lg:text-xl"

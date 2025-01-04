@@ -1,83 +1,179 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { AppContext } from '../context/AppContext'
-import axios from 'axios'
-import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from "react";
+import { AppContext } from "../context/AppContext";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import Google from '../../public/images/google.png';
+import Facebook from '../../public/images/facebook.png';
+import Apple from '../../public/images/apple.png';
+import {
+  Card,
+  Input,
+  Checkbox,
+  Button,
+  Typography,
+} from "@material-tailwind/react";
 
 const Login = () => {
+  const [formState, setFormState] = useState("Sign Up"); // Renamed for clarity
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  }); // Consolidated state
+  const { name, email, password } = formData;
 
-  const [state, setState] = useState('Sign Up')
+  const navigate = useNavigate();
+  const { backendUrl, token, setToken } = useContext(AppContext);
 
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-
-  const navigate = useNavigate()
-  const { backendUrl, token, setToken } = useContext(AppContext)
+  // Handle input changes for a dynamic form
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
 
-    if (state === 'Sign Up') {
+    const endpoint =
+      formState === "Sign Up" ? "/api/user/register" : "/api/user/login";
 
-      const { data } = await axios.post(backendUrl + '/api/user/register', { name, email, password })
+    const payload =
+      formState === "Sign Up"
+        ? { name, email, password }
+        : { email, password };
 
-      if (data.success) {
-        localStorage.setItem('token', data.token)
-        setToken(data.token)
-      } else {
-        toast.error(data.message)
-      }
-
-    } else {
-
-      const { data } = await axios.post(backendUrl + '/api/user/login', { email, password })
+    try {
+      const { data } = await axios.post(backendUrl + endpoint, payload);
 
       if (data.success) {
-        localStorage.setItem('token', data.token)
-        setToken(data.token)
+        localStorage.setItem("token", data.token);
+        setToken(data.token);
+        toast.success("Success!");
       } else {
-        toast.error(data.message)
+        toast.error(data.message);
       }
-
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message || "An error occurred. Please try again."
+      );
     }
-
-  }
+  };
 
   useEffect(() => {
-    if (token) {
-      navigate('/home')
-    }
-  }, [token])
+    if (token) navigate("/home");
+  }, [token, navigate]);
+
+  const socialIcons = [
+    { src: Google, alt: "Google" },
+    { src: Facebook, alt: "Facebook" },
+    { src: Apple, alt: "Apple" },
+  ];
 
   return (
-    <form onSubmit={onSubmitHandler} className='min-h-[80vh] flex items-center'>
-      <div className='flex flex-col gap-3 m-auto items-start p-8 min-w-[340px] sm:min-w-96 border rounded-xl text-[#5E5E5E] text-sm shadow-lg'>
-        <p className='text-2xl font-semibold'>{state === 'Sign Up' ? 'Create Account' : 'Login'}</p>
-        <p>Please {state === 'Sign Up' ? 'sign up' : 'log in'} to book appointment</p>
-        {state === 'Sign Up'
-          ? <div className='w-full '>
-            <p>Full Name</p>
-            <input onChange={(e) => setName(e.target.value)} value={name} className='border border-[#DADADA] rounded w-full p-2 mt-1' type="text" required />
+    <Card color="transparent" shadow={false} className="p-6 max-w-sm mx-auto">
+      <Typography variant="h3" className="text-center font-bold text-primary">
+        {formState === "Sign Up" ? "Create Account" : "Login"}
+      </Typography>
+      <Typography color="gray" className="mt-1 text-center font-normal">
+        {formState === "Sign Up"
+          ? "Nice to meet you! Enter your details to register."
+          : "Welcome back! Please log in to continue."}
+      </Typography>
+      <form className="mt-8 space-y-6" onSubmit={onSubmitHandler}>
+        {formState === "Sign Up" && (
+          <Input
+            label="Full Name"
+            size="lg"
+            name="name"
+            value={name}
+            onChange={handleInputChange}
+            required
+          />
+        )}
+        <Input
+          label="Email"
+          size="lg"
+          type="email"
+          name="email"
+          value={email}
+          onChange={handleInputChange}
+          required
+        />
+        <Input
+          label="Password"
+          size="lg"
+          type="password"
+          name="password"
+          value={password}
+          onChange={handleInputChange}
+          required
+        />
+        {formState === "Sign Up" && (
+          <Checkbox
+            label={
+              <Typography
+                variant="small"
+                color="gray"
+                className="flex items-center font-normal"
+              >
+                I agree to the{" "}
+                <a
+                  href="#"
+                  className="font-medium transition-colors hover:text-gray-900"
+                >
+                  Terms and Conditions
+                </a>
+              </Typography>
+            }
+          />
+        )}
+        <Button className="bg-primary" type="submit" fullWidth>
+          {formState === "Sign Up" ? "Create Account" : "Login"}
+        </Button>
+        <div className="flex flex-col items-center mt-4 space-y-4">
+          <div className="flex items-center justify-center space-x-8">
+            {socialIcons.map(({ src, alt }) => (
+              <div
+                key={alt}
+                className="rounded-full bg-[#ebf1f4] p-2 flex items-center justify-center w-10 h-10"
+              >
+                <img src={src} alt={alt} className="w-5 h-5" />
+              </div>
+            ))}
           </div>
-          : null
-        }
-        <div className='w-full '>
-          <p>Email</p>
-          <input onChange={(e) => setEmail(e.target.value)} value={email} className='border border-[#DADADA] rounded w-full p-2 mt-1' type="email" required />
+          <Typography variant="small" className="text-center text-gray-700">
+            By logging in, you agree to our{" "}
+            <span className="text-black font-bold">Terms & Conditions</span> and{" "}
+            <span className="text-black font-bold">Privacy Policy</span>.
+          </Typography>
         </div>
-        <div className='w-full '>
-          <p>Password</p>
-          <input onChange={(e) => setPassword(e.target.value)} value={password} className='border border-[#DADADA] rounded w-full p-2 mt-1' type="password" required />
-        </div>
-        <button className='bg-primary text-white w-full py-2 my-2 rounded-md text-base'>{state === 'Sign Up' ? 'Create account' : 'Login'}</button>
-        {state === 'Sign Up'
-          ? <p>Already have an account? <span onClick={() => setState('Login')} className='text-primary underline cursor-pointer'>Login here</span></p>
-          : <p>Create an new account? <span onClick={() => setState('Sign Up')} className='text-primary underline cursor-pointer'>Click here</span></p>
-        }
-      </div>
-    </form>
-  )
-}
+      </form>
+      <Typography color="gray" className="mt-4 text-center font-normal">
+        {formState === "Sign Up" ? (
+          <>
+            Already have an account?{" "}
+            <span
+              onClick={() => setFormState("Login")}
+              className="text-primary font-medium cursor-pointer"
+            >
+              Login here
+            </span>
+          </>
+        ) : (
+          <>
+            Don’t have an account?{" "}
+            <span
+              onClick={() => setFormState("Sign Up")}
+              className="text-primary font-medium cursor-pointer"
+            >
+              Sign up here
+            </span>
+          </>
+        )}
+      </Typography>
+    </Card>
+  );
+};
 
-export default Login
+export default Login;
