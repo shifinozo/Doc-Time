@@ -8,6 +8,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import MyProfile from "./pages/MyProfile";
 import MyAppointments from "./pages/MyAppointments";
+import Chat from "./pages/Chat";
 import Appointment from "./pages/Appointment";
 import GettingStarted from "./pages/GettingStarted";
 import { ToastContainer } from "react-toastify";
@@ -15,7 +16,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
-    <div className="dark:bg-gray-900 bg-gray-50">
+    <div className="dark:bg-gray-900 bg-[#fff]">
       <div className="mx-4 sm:mx-[10%]">
         <ToastContainer />
         <Routes>
@@ -24,6 +25,7 @@ function App() {
             <Route path="home" element={<Home />} />
             <Route path="doctors" element={<Doctors />} />
             <Route path="doctors/:speciality" element={<Doctors />} />
+            <Route path="chat" element={<Chat />} />
             <Route path="login" element={<Login />} />
             <Route path="about" element={<About />} />
             <Route path="contact" element={<Contact />} />
