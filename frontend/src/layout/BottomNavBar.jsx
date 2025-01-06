@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { FaHome, FaSearch, FaHeart, FaUser } from "react-icons/fa";
 import { PiChatCenteredTextFill } from "react-icons/pi";
 
+
 const navs = [
   { icon: FaHome, href: "/home" },
   { icon: PiChatCenteredTextFill, href: "/chat" },

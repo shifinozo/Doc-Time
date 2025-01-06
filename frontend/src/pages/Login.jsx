@@ -75,12 +75,12 @@ const Login = () => {
       <Typography variant="h3" className="text-center font-bold text-primary">
         {formState === "Sign Up" ? "Create Account" : "Login"}
       </Typography>
-      <Typography color="gray" className="mt-1 text-center font-normal">
+      <Typography  className="mt-1 text-sm text-center font-normal text-gray-700">
         {formState === "Sign Up"
           ? "Nice to meet you! Enter your details to register."
           : "Welcome back! Please log in to continue."}
       </Typography>
-      <form className="mt-8 space-y-6" onSubmit={onSubmitHandler}>
+      <form className="mt-6 space-y-6" onSubmit={onSubmitHandler}>
         {formState === "Sign Up" && (
           <Input
             label="Full Name"
@@ -142,7 +142,7 @@ const Login = () => {
               </div>
             ))}
           </div>
-          <Typography variant="small" className="text-center text-gray-700">
+          <Typography className="text-center text-sm text-gray-700">
             By logging in, you agree to our{" "}
             <span className="text-black font-bold">Terms & Conditions</span> and{" "}
             <span className="text-black font-bold">Privacy Policy</span>.
