@@ -16,13 +16,14 @@ import {
 } from "@material-tailwind/react";
 import {
   IoMdSettings,
-  IoIosShareAlt,
-  IoMdLock,
+  IoIosShareAlt
 } from "react-icons/io";
-import { IoLanguage } from "react-icons/io5";
-import { FaUser, FaRegCalendarAlt } from "react-icons/fa";
-import { MdEmail, MdOutlineKeyboardArrowRight } from "react-icons/md";
-
+import { MdOutlineKeyboardArrowRight } from "react-icons/md";
+import User from '../../public/images/user1.png'
+import Calendar from '../../public/images/calendar.png'
+import Padlock from '../../public/images/padlock.png'
+import Translate from '../../public/images/translate.png'
+import Right from '../../public/images/right.png'
 // Reusable Input Component
 const FieldInput = ({ label, value, onChange, type = "text", isEdit }) => (
   <div className="flex flex-col gap-2">
@@ -100,30 +101,32 @@ const MyProfile = () => {
   const buttons = [
     {
       label: "My Profile",
-      icon: <FaUser className="text-white text-xl" />,
+      icon: <img src={User} alt="User Icon" className="h-10 w-10 bg-[#eaf2ff] p-2 rounded-full border border-[#eaf2ff]" />,
       onClick: () => setDialogOpen(true),
     },
     {
       label: "Appointment History",
-      icon: <FaRegCalendarAlt className="text-white text-xl" />,
+      icon: <img src={Calendar} alt="User Icon" className="h-10 w-10 bg-[#eaf2ff] p-2 rounded-full border border-[#eaf2ff]" />,
       onClick: () => console.log("Appointment History clicked"),
     },
+    
     {
       label: "Change Password",
-      icon: <IoMdLock className="text-white text-xl" />,
+      icon: <img src={Padlock} alt="User Icon" className="h-10 w-10 bg-[#eaf2ff] p-2 rounded-full border border-[#eaf2ff]" />,
       onClick: () => console.log("Change Password clicked"),
     },
     {
       label: "Change Language",
-      icon: <IoLanguage className="text-white text-xl" />,
+      icon: <img src={Translate} alt="User Icon" className="h-10 w-10 bg-[#eaf2ff] p-2 rounded-full border border-[#eaf2ff]" />,
       onClick: () => console.log("Change Language clicked"),
     },
+   
   ];
 
   return userData ? (
-    <div className="flex flex-col items-center w-full h-full text-white overflow-y-auto bg-[#d9e3ea]">
+    <div className="flex flex-col fixed items-center w-full  text-white min-h-screen overflow-auto bg-[#eaf2ff] ">
       {/* Profile Header */}
-      <div className="relative flex flex-col items-center pt-10 rounded-lg w-full h-60">
+      <div className="relative flex flex-col items-center pt-10 rounded-3xl w-full h-40">
         <div className="absolute top-4 right-4 flex gap-4">
           <Tooltip content="Share Profile">
             <button className="text-2xl text-black hover:text-gray-600">
@@ -140,37 +143,33 @@ const MyProfile = () => {
           className="w-28 h-28 rounded-full"
           src={image ? URL.createObjectURL(image) : userData.image || "/default-avatar.png"}
         />
-        {isEdit && (
-          <Input type="file" accept="image/*" className="mt-2" onChange={handleImageUpload} />
-        )}
-        <div className="text-center pt-4">
+       
+        <div className="text-center pt-2">
           <FieldInput
-            label="Name"
             value={userData.name}
-            onChange={(e) => handleInputChange("name", e.target.value)}
-            isEdit={isEdit}
+            
           />
         </div>
         <p className="flex items-center text-black mt-2">
-          <MdEmail className="mr-2 text-gray-600" />
-          Email: <span className="ml-2 text-blue-600">{userData.email}</span>
+         <span className="ml-2 text-gray-700">{userData.email}</span>
         </p>
       </div>
 
       {/* Action Buttons */}
-      <div className="flex flex-col items-center gap-4 mt-5 max-w-sm">
+      <div className="flex flex-col items-start gap-4 mt-20 pt-4 md:pl-20 pl-6 w-full min-h-screen overflow-auto rounded-t-2xl bg-white">
+        <h1 className="text-black max-w-prose font-bold">Account Overview</h1>
         {buttons.map((button, index) => (
           <Button
             key={index}
             fullWidth
-            className="bg-primary h-16 w-80 flex items-center justify-between px-6"
+            className="bg-transparent h-14 w-80 md:h-14 md:w-[40%] flex items-center justify-between px-6"
             onClick={button.onClick}
           >
             <div className="flex items-center gap-4">
               {button.icon}
-              <span className="text-white">{button.label}</span>
+              <span className="text-primary">{button.label}</span>
             </div>
-            <MdOutlineKeyboardArrowRight className="text-white text-xl" />
+            <img src={Right} alt="Right Arrow" className="h-6 w-6" /> 
           </Button>
         ))}
       </div>

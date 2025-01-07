@@ -16,8 +16,8 @@ import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
-    <div className="dark:bg-gray-900 bg-[#fff]">
-      <div className="mx-4 sm:mx-[10%]">
+    <div className="dark:bg-gray-900 bg-[#fff] ">
+      <div className="">
         <ToastContainer />
         <Routes>
           <Route path="/" element={<GettingStarted />} />
