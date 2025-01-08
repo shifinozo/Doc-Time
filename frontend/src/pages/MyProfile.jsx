@@ -14,16 +14,14 @@ import {
   DialogBody,
   DialogFooter,
 } from "@material-tailwind/react";
-import {
-  IoMdSettings,
-  IoIosShareAlt
-} from "react-icons/io";
-import { MdOutlineKeyboardArrowRight } from "react-icons/md";
+import Setting from '../../public/images/settings.png'
+import Share from '../../public/images/share.png'
 import User from '../../public/images/user1.png'
 import Calendar from '../../public/images/calendar.png'
 import Padlock from '../../public/images/padlock.png'
 import Translate from '../../public/images/translate.png'
 import Right from '../../public/images/right.png'
+import { List, ListItem, ListItemPrefix, ListItemSuffix } from "@material-tailwind/react";
 // Reusable Input Component
 const FieldInput = ({ label, value, onChange, type = "text", isEdit }) => (
   <div className="flex flex-col gap-2">
@@ -127,18 +125,18 @@ const MyProfile = () => {
     <div className="flex flex-col fixed items-center w-full  text-white min-h-screen overflow-auto bg-[#eaf2ff] ">
       {/* Profile Header */}
       <div className="relative flex flex-col items-center pt-10 rounded-3xl w-full h-40">
-        <div className="absolute top-4 right-4 flex gap-4">
-          <Tooltip content="Share Profile">
-            <button className="text-2xl text-black hover:text-gray-600">
-              <IoIosShareAlt />
-            </button>
-          </Tooltip>
-          <Tooltip content="Settings">
-            <button className="text-2xl text-black hover:text-gray-600">
-              <IoMdSettings />
-            </button>
-          </Tooltip>
-        </div>
+      <div className="absolute top-4 right-5 flex gap-2">
+  <Tooltip content="Share Profile">
+    <button className="hover:text-gray-600">
+      <img src={Share} alt="Share Profile" className="h-6 w-6" />
+    </button>
+  </Tooltip>
+  <Tooltip content="Settings">
+    <button className="hover:text-gray-600">
+      <img src={Setting} alt="Settings" className="h-6 w-6" />
+    </button>
+  </Tooltip>
+</div>
         <Avatar
           className="w-28 h-28 rounded-full"
           src={image ? URL.createObjectURL(image) : userData.image || "/default-avatar.png"}
@@ -150,90 +148,98 @@ const MyProfile = () => {
             
           />
         </div>
-        <p className="flex items-center text-black mt-2">
+        <p className="flex items-center text-black ">
          <span className="ml-2 text-gray-700">{userData.email}</span>
         </p>
       </div>
 
       {/* Action Buttons */}
+     
       <div className="flex flex-col items-start gap-4 mt-20 pt-4 md:pl-20 pl-6 w-full min-h-screen overflow-auto rounded-t-2xl bg-white">
-        <h1 className="text-black max-w-prose font-bold">Account Overview</h1>
-        {buttons.map((button, index) => (
-          <Button
-            key={index}
-            fullWidth
-            className="bg-transparent h-14 w-80 md:h-14 md:w-[40%] flex items-center justify-between px-6"
-            onClick={button.onClick}
-          >
-            <div className="flex items-center gap-4">
-              {button.icon}
-              <span className="text-primary">{button.label}</span>
-            </div>
-            <img src={Right} alt="Right Arrow" className="h-6 w-6" /> 
-          </Button>
-        ))}
-      </div>
-
-      {/* Dialog for My Profile */}
-      <Dialog open={dialogOpen} handler={setDialogOpen}>
-        <DialogHeader>User Profile Details</DialogHeader>
-        <DialogBody divider>
-          <Avatar
-            className="w-28 h-28 rounded-full"
-            src={image ? URL.createObjectURL(image) : userData.image || "/default-avatar.png"}
-          />
-          {isEdit && (
-            <Input type="file" accept="image/*" className="mt-2" onChange={handleImageUpload} />
-          )}
-          <div className="flex flex-col gap-4">
-            <FieldInput
-              label="Phone"
-              value={userData.phone}
-              onChange={(e) => handleInputChange("phone", e.target.value)}
-              isEdit={isEdit}
-            />
-            <FieldInput
-              label="Gender"
-              value={userData.gender}
-              onChange={(value) => handleInputChange("gender", value)}
-              type="select"
-              isEdit={isEdit}
-            />
-            <FieldInput
-              label="Address"
-              value={userData.address?.street}
-              onChange={(e) => handleInputChange("address.street", e.target.value)}
-              isEdit={isEdit}
-            />
-            <FieldInput
-              label="Date of Birth"
-              value={userData.dob}
-              onChange={(e) => handleInputChange("dob", e.target.value)}
-              type="date"
-              isEdit={isEdit}
-            />
+  <h1 className="text-black max-w-prose font-bold">Account Overview</h1>
+  <List className="w-full md:w-[90%] bg-transparent">
+    {buttons.map((button, index) => (
+      <ListItem
+        key={index}
+        onClick={button.onClick}
+        className="h-14 flex items-center justify-between px-6 hover:bg-gray-100 cursor-pointer"
+      >
+        <ListItemPrefix>
+          <div className="flex items-center gap-4">
+            {button.icon}
+            <span className="text-black">{button.label}</span>
           </div>
-        </DialogBody>
-        <DialogFooter>
-          {isEdit ? (
-            <>
-              <Button variant="gradient" color="blue" onClick={updateUserProfileData}>
-                Save
-              </Button>
-              <Button variant="gradient" color="red" onClick={() => setIsEdit(false)}>
-                Cancel
-              </Button>
-            </>
-          ) : (
-            <Button variant="gradient" color="blue" onClick={() => setIsEdit(true)}>
-              Edit
-            </Button>
-          )}
-          <Button variant="gradient" color="gray" onClick={() => setDialogOpen(false)}>
-            Close
-          </Button>
-        </DialogFooter>
-      </Dialog>
+        </ListItemPrefix>
+        <ListItemSuffix>
+          <img src={Right} alt="Right Arrow" className="h-6 w-6" />
+        </ListItemSuffix>
+      </ListItem>
+    ))}
+  </List>
+</div>
+      {/* Dialog for My Profile */}
+      <Dialog open={dialogOpen} handler={setDialogOpen} size="sm" className="max-h-[90vh]">
+  <DialogHeader>User Profile Details</DialogHeader>
+  <DialogBody divider className="max-h-[60vh] overflow-y-auto">
+    <Avatar
+      className="w-20 h-20 rounded-full mx-auto"
+      src={image ? URL.createObjectURL(image) : userData.image || "/default-avatar.png"}
+    />
+    {isEdit && (
+      <Input type="file" accept="image/*" className="mt-2" onChange={handleImageUpload} />
+    )}
+    <div className="flex flex-col gap-1">
+      <FieldInput
+        label="Phone"
+        value={userData.phone}
+        onChange={(e) => handleInputChange("phone", e.target.value)}
+        isEdit={isEdit}
+      />
+      <FieldInput
+        label="Gender"
+        value={userData.gender}
+        onChange={(value) => handleInputChange("gender", value)}
+        type="select"
+        isEdit={isEdit}
+      />
+      <FieldInput
+        label="Address"
+        value={userData.address?.street}
+        onChange={(e) => handleInputChange("address.street", e.target.value)}
+        isEdit={isEdit}
+      />
+      <FieldInput
+        label="Date of Birth"
+        value={userData.dob}
+        onChange={(e) => handleInputChange("dob", e.target.value)}
+        type="date"
+        isEdit={isEdit}
+      />
+    </div>
+  </DialogBody>
+  <DialogFooter className="flex justify-evenly gap-2">
+  {isEdit ? (
+    <>
+      <Button variant="gradient" color="blue" className="flex-1" onClick={updateUserProfileData}>
+        Save
+      </Button>
+      <Button variant="gradient" color="red" className="flex-1" onClick={() => setIsEdit(false)}>
+        Cancel
+      </Button>
+    </>
+  ) : (
+    <Button variant="gradient" color="blue" className="flex-1" onClick={() => setIsEdit(true)}>
+      Edit
+    </Button>
+  )}
+  <Button variant="gradient" color="gray" className="flex-1" onClick={() => setDialogOpen(false)}>
+    Close
+  </Button>
+</DialogFooter>
+
+</Dialog>
+
+
     </div>
   ) : null;
 };
