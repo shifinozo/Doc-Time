@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { AppContext } from "../context/AppContext";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import {
   Avatar,
   Button,
@@ -22,6 +23,7 @@ import Padlock from '../../public/images/padlock.png'
 import Translate from '../../public/images/translate.png'
 import Right from '../../public/images/right.png'
 import { List, ListItem, ListItemPrefix, ListItemSuffix } from "@material-tailwind/react";
+
 // Reusable Input Component
 const FieldInput = ({ label, value, onChange, type = "text", isEdit }) => (
   <div className="flex flex-col gap-2">
@@ -42,12 +44,16 @@ const FieldInput = ({ label, value, onChange, type = "text", isEdit }) => (
   </div>
 );
 
+
+
 const MyProfile = () => {
+  const navigate = useNavigate();
   const [isEdit, setIsEdit] = useState(false);
   const [image, setImage] = useState(null);
   const [dialogOpen, setDialogOpen] = useState(false);
   const { token, backendUrl, userData, setUserData, loadUserProfileData } =
     useContext(AppContext);
+    
 
   // Handle input changes
   const handleInputChange = (field, value) => {
@@ -105,7 +111,7 @@ const MyProfile = () => {
     {
       label: "Appointment History",
       icon: <img src={Calendar} alt="User Icon" className="h-10 w-10 bg-[#eaf2ff] p-2 rounded-full border border-[#eaf2ff]" />,
-      onClick: () => console.log("Appointment History clicked"),
+      onClick: () => navigate("/my-appointments"),
     },
     
     {

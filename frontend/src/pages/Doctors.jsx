@@ -1,163 +1,101 @@
-import React, { useContext, useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
-import { AppContext } from "../context/AppContext"
-import Navbar from "../components/NavBar"
-import Footer from "../components/Footer"
-const Doctors = () => {
-  const { speciality } = useParams()
-  const { doctors } = useContext(AppContext)
-  const [filterDoc, setFilterDoc] = useState([])
-  const [showFilter, setShowFilter] = useState(false)
-  const navigate = useNavigate()
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { MdFilterList } from "react-icons/md";
+import {FaSearch } from "react-icons/fa";
+import { AppContext } from "../context/AppContext";
+import { Button, Dialog, DialogHeader, DialogBody, DialogFooter } from "@material-tailwind/react";
+
+function Doctors() {
+  const { speciality } = useParams();
+  const { doctors } = useContext(AppContext);
+  const [filterDoc, setFilterDoc] = useState([]);
+  const [showFilter, setShowFilter] = useState(false);
+  const navigate = useNavigate();
 
   const applyFilter = () => {
     if (speciality) {
-      setFilterDoc(doctors.filter((doc) => doc.speciality === speciality))
+      setFilterDoc(doctors.filter((doc) => doc.speciality === speciality));
     } else {
-      setFilterDoc(doctors)
+      setFilterDoc(doctors);
     }
-  }
+  };
 
   useEffect(() => {
-    applyFilter()
-  }, [doctors, speciality])
+    applyFilter();
+  }, [doctors, speciality]);
 
   return (
-    <div>
-      <Navbar />
-      <p className="text-gray-600 dark:text-gray-100">
-        Browse through the doctors specialist.
-      </p>
-      <div className="flex flex-col sm:flex-row items-start gap-5 mt-5">
-        <button
-          className={`py-1 px-3 border rounded text-sm transition-all sm:hidden dark:text-white  ${
-            showFilter ? "bg-primary text-white " : ""
-          }`}
-          onClick={() => setShowFilter((prev) => !prev)}
-        >
-          Filter
-        </button>
-        <div
-          className={`flex-col gap-4 text-sm text-gray-600 ${
-            showFilter ? "flex" : "hidden sm:flex"
-          }`}
-        >
-          <p
-            onClick={() =>
-              speciality === "General physician"
-                ? navigate("/doctors")
-                : navigate("/doctors/General physician")
-            }
-            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 dark:border-gray-500 rounded transition-all cursor-pointer  ${
-              speciality === "General physician"
-                ? "bg-indigo-100 text-black dark:bg-indigo-400 dark:text-white"
-                : ""
-            }`}
+    <div className="fixed w-full min-h-screen h-screen overflow-hidden">
+      {/* Input Bar and Filter Button */}
+      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-10 w-full flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="relative w-80 md:w-96 max-w-lg flex items-center justify-center">
+          <input
+            type="text"
+            placeholder="Search doctor name"
+            className="w-full px-2 py-2 pr-10 border border-gray-300 rounded-l-md bg-white shadow-md focus:outline-none focus:ring-2 focus:ring-black"
+          />
+          {/* Filter Button */}
+          <Button
+            className="bg-white hover:bg-gray-100 text-gray-500 text-xl rounded-md p-2 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 ml-2"
+            onClick={() => setShowFilter(true)}
           >
-            General physician
-          </p>
-          <p
-            onClick={() =>
-              speciality === "Gynecologist"
-                ? navigate("/doctors")
-                : navigate("/doctors/Gynecologist")
-            }
-            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 dark:border-gray-500 rounded transition-all cursor-pointer  ${
-              speciality === "Gynecologist"
-                ? "bg-indigo-100 text-black dark:bg-indigo-400 dark:text-white"
-                : ""
-            }`}
-          >
-            Gynecologist
-          </p>
-          <p
-            onClick={() =>
-              speciality === "Dermatologist"
-                ? navigate("/doctors")
-                : navigate("/doctors/Dermatologist")
-            }
-            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 dark:border-gray-500 rounded transition-all cursor-pointer  ${
-              speciality === "Dermatologist"
-                ? "bg-indigo-100 text-black dark:bg-indigo-400 dark:text-white"
-                : ""
-            }`}
-          >
-            Dermatologist
-          </p>
-          <p
-            onClick={() =>
-              speciality === "Pediatricians"
-                ? navigate("/doctors")
-                : navigate("/doctors/Pediatricians")
-            }
-            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 dark:border-gray-500 rounded transition-all cursor-pointer  ${
-              speciality === "Pediatricians"
-                ? "bg-indigo-100 text-black dark:bg-indigo-400 dark:text-white"
-                : ""
-            }`}
-          >
-            Pediatricians
-          </p>
-          <p
-            onClick={() =>
-              speciality === "Neurologist"
-                ? navigate("/doctors")
-                : navigate("/doctors/Neurologist")
-            }
-            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 dark:border-gray-500 rounded transition-all cursor-pointer  ${
-              speciality === "Neurologist"
-                ? "bg-indigo-100 text-black dark:bg-indigo-400 dark:text-white"
-                : ""
-            }`}
-          >
-            Neurologist
-          </p>
-          <p
-            onClick={() =>
-              speciality === "Gastroenterologist"
-                ? navigate("/doctors")
-                : navigate("/doctors/Gastroenterologist")
-            }
-            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 dark:border-gray-500 rounded transition-all cursor-pointer  ${
-              speciality === "Gastroenterologist"
-                ? "bg-indigo-100 text-black dark:bg-indigo-400 dark:text-white"
-                : ""
-            }`}
-          >
-            Gastroenterologist
-          </p>
-        </div>
-        <div className="w-full grid grid-cols-auto gap-4 gap-y-6">
-          {filterDoc.map((item, index) => (
-            <div
-              onClick={() => navigate(`/appointment/${item._id}`)}
-              className="border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500"
-              key={index}
-            >
-              <img
-                className="bg-blue-50 dark:bg-blue-gray-200"
-                src={item.image}
-                alt=""
-              />
-              <div className="p-4">
-                <div className="flex items-center gap-2 text-sm text-center text-green-500">
-                  <p className="w-2 h-2 bg-green-500 rounded-full"></p>
-                  <p>Available</p>
-                </div>
-                <p className="text-gray-900 dark:text-gray-200 text-lg font-medium">
-                  {item.name}
-                </p>
-                <p className="text-gray-600 text-sm dark:text-gray-400">
-                  {item.speciality}{" "}
-                </p>
-              </div>
-            </div>
-          ))}
+            <MdFilterList />
+          </Button>
         </div>
       </div>
-      <Footer />
+
+      {/* Material Tailwind Dialog */}
+      <Dialog open={showFilter} handler={() => setShowFilter(false)}>
+        <DialogHeader>Filter by Speciality</DialogHeader>
+        <DialogBody>
+          <div className="flex flex-col gap-2">
+            {[
+              "General physician",
+              "Gynecologist",
+              "Dermatologist",
+              "Pediatricians",
+              "Neurologist",
+              "Gastroenterologist",
+            ].map((specialityOption) => (
+              <p
+                key={specialityOption}
+                onClick={() =>
+                  speciality === specialityOption
+                    ? navigate("/doctors")
+                    : navigate(`/doctors/${specialityOption}`)
+                }
+                className={`cursor-pointer p-2 border rounded ${
+                  speciality === specialityOption ? "bg-indigo-100" : ""
+                }`}
+              >
+                {specialityOption}
+              </p>
+            ))}
+          </div>
+        </DialogBody>
+        <DialogFooter>
+          <Button
+            color="red"
+            onClick={() => setShowFilter(false)}
+            className="mr-2 bg-primary"
+          >
+            Close
+          </Button>
+        </DialogFooter>
+      </Dialog>
+
+      {/* Google Map */}
+      <iframe
+        className="w-full h-full"
+        frameBorder="0"
+        scrolling="no"
+        marginHeight="0"
+        marginWidth="0"
+        src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=perinthalmanna&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+        title="Google Map"
+      ></iframe>
     </div>
-  )
+  );
 }
 
-export default Doctors
+export default Doctors;

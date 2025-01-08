@@ -17,7 +17,8 @@ export default function BottomNavBar() {
   const location = useLocation();
 
   return (
-    <div className="fixed bottom-0 left-1/2 flex w-[100%] -translate-x-1/2 justify-center gap-0 rounded-md bg-[#fff] p-2 shadow-lg border border-t-solid- border-opacity-100 border-t-[#d9e3ea]">
+    <div className="fixed bottom-0 left-1/2 flex w-[100%]  -translate-x-1/2 justify-center gap-0 rounded-md bg-[#fff] p-2 shadow-lg border border-t-solid- border-opacity-100 border-t-[#d9e3ea] sm:max-w-sm">
+      
       {navs.map(({ icon: Icon, href }, i) => {
         const isActive = location.pathname === href;
 
