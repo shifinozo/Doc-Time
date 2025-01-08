@@ -1,14 +1,15 @@
 import { Button } from "@material-tailwind/react";
 import { Link, useLocation } from "react-router-dom";
-import { FaHome, FaSearch, FaHeart, FaUser } from "react-icons/fa";
+import { FaHome, FaSearch,FaUser } from "react-icons/fa";
 import { PiChatCenteredTextFill } from "react-icons/pi";
+import { FaCalendarAlt } from "react-icons/fa";
 
 
 const navs = [
   { icon: FaHome, href: "/home" },
   { icon: PiChatCenteredTextFill, href: "/chat" },
   { icon: FaSearch, href: "/doctors" },
-  { icon: FaHeart, href: "/my-appointments" },
+  { icon:  FaCalendarAlt, href: "/my-appointments" },
   { icon: FaUser, href: "/my-profile" },
 ];
 

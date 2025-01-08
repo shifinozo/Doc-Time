@@ -124,7 +124,7 @@ const MyProfile = () => {
   return userData ? (
     <div className="flex flex-col fixed items-center w-full  text-white min-h-screen overflow-auto bg-[#eaf2ff] ">
       {/* Profile Header */}
-      <div className="relative flex flex-col items-center pt-10 rounded-3xl w-full h-40">
+      <div className="relative flex flex-col items-center pt-10 rounded-3xl w-full h-32">
       <div className="absolute top-4 right-5 flex gap-2">
   <Tooltip content="Share Profile">
     <button className="hover:text-gray-600">
@@ -217,25 +217,35 @@ const MyProfile = () => {
       />
     </div>
   </DialogBody>
-  <DialogFooter className="flex justify-evenly gap-2">
-  {isEdit ? (
-    <>
-      <Button variant="gradient" color="blue" className="flex-1" onClick={updateUserProfileData}>
-        Save
-      </Button>
-      <Button variant="gradient" color="red" className="flex-1" onClick={() => setIsEdit(false)}>
-        Cancel
-      </Button>
-    </>
-  ) : (
-    <Button variant="gradient" color="blue" className="flex-1" onClick={() => setIsEdit(true)}>
-      Edit
+  <DialogFooter className="flex justify-between gap-2">
+  <Button
+    variant="gradient"
+    color="blue"
+    className="flex-1"
+    onClick={isEdit ? updateUserProfileData : () => setIsEdit(true)}
+  >
+    {isEdit ? "Save" : "Edit"}
+  </Button>
+  {isEdit && (
+    <Button
+      variant="gradient"
+      color="red"
+      className="flex-1"
+      onClick={() => setIsEdit(false)}
+    >
+      Cancel
     </Button>
   )}
-  <Button variant="gradient" color="gray" className="flex-1" onClick={() => setDialogOpen(false)}>
+  <Button
+    variant="gradient"
+    color="gray"
+    className={`flex-1 ${!isEdit ? "ml-2" : ""}`}
+    onClick={() => setDialogOpen(false)}
+  >
     Close
   </Button>
 </DialogFooter>
+
 
 </Dialog>
 
