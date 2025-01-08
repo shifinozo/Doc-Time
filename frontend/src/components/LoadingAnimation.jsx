@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import DocLogo from "../../public/images/Doclogo.png";
+import DocLogo from "../../public/images/doclogo.png";
 import LottieAnimation from "./LottieAnimation";
 
 
