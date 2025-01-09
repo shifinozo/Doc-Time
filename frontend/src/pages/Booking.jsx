@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { Button, Card } from "@material-tailwind/react";
-import DOCT from '../../public/images/doct.png';
+import DOCT from '../../public/images/Doct.png';
 
 function Booking() {
   const { userData } = useContext(AppContext);
