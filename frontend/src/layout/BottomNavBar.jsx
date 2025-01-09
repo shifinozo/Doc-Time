@@ -9,7 +9,7 @@ const navs = [
   { icon: FaHome, href: "/home" },
   { icon: PiChatCenteredTextFill, href: "/chat" },
   { icon: FaSearch, href: "/doctors" },
-  { icon:  FaCalendarAlt, href: "/my-appointments" },
+  { icon:  FaCalendarAlt, href: "/booking" },
   { icon: FaUser, href: "/my-profile" },
 ];
 
