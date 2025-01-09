@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { Button, Card } from "@material-tailwind/react";
-import DOCT from '../../public/images/doct.png'
+import Doct from '../../src/assets/doct.png'
 import SpecialityMenu from "../components/SpecialtyMenu"
 
 function Booking() {
@@ -27,13 +27,13 @@ function Booking() {
 
       {/* Responsive Card Section */}
       <div className="mt-3 md:mt-6">
-        <Card className="w-full lg:w-full h-48  md:h-[50vh] mx-auto bg-primary relative">
+        <Card className="w-full lg:w-full h-48  md:h-[55vh] mx-auto bg-primary relative">
           {/* Image Container with flex for alignment */}
           <div className="w-full h-full overflow-hidden relative flex justify-center md:justify-end md:pl-40  pr-32">
             <img
-              src={DOCT}
+              src={Doct}
               alt="card-image"
-              className="w-full h-44 mt-12 md:mt-0 md:w-[65vh] md:h-[60vh] ml-80 object-cover" // Ensures image covers entire area and adapts to screen size
+              className="w-full h-44 mt-12 md:mt-0 md:w-[65vh] md:h-[70vh] ml-80 object-cover" // Ensures image covers entire area and adapts to screen size
             />
           </div>
 
