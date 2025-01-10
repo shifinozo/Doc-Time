@@ -4,6 +4,7 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import { Button, Card } from "@material-tailwind/react";
 import Doct from '../../src/assets/doct.png'
 import SpecialityMenu from "../components/SpecialtyMenu"
+import TopDoctors from "../components/TopDoctors"
 
 function Booking() {
   const { userData } = useContext(AppContext);
@@ -50,6 +51,7 @@ function Booking() {
         </Card>
       </div>
       <SpecialityMenu />
+      <TopDoctors />
     </div>
   );
 }

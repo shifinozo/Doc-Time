@@ -36,7 +36,9 @@ import General_physician from './General_physician1.png'
 import Gynecologist from './Gynecologist1.png'
 import Neurologist from './Neurologist1.png'
 import Pediatricians from './Pediatricians1.png'
-
+import Dent from './dent.png'
+import Intestine from './intestine.png'
+import Oncology from './oncology.png'
 
 
 export const assets = {
@@ -61,7 +63,7 @@ export const assets = {
 
 export const specialityData = [
     {
-        speciality: 'General physician',
+        speciality: 'General',
         image: General_physician
     },
     {
@@ -69,7 +71,7 @@ export const specialityData = [
         image: Neurologist
     },
     {
-        speciality: 'Gastroenterologist',
+        speciality: 'Gastroenter',
         image: Gastroenterologist
     },
     {
@@ -83,6 +85,18 @@ export const specialityData = [
     {
         speciality: 'Dermatologist',
         image: Dermatologist
+    },
+    {
+        speciality: 'Odontology',
+        image: Dent
+    },
+    {
+        speciality: 'Intestine',
+        image: Intestine,
+    },
+    {
+        speciality: 'Oncology',
+        image: Oncology,
     },
    
 ]
