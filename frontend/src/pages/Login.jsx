@@ -3,9 +3,7 @@ import { AppContext } from "../context/AppContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import Google from '../../public/images/google.png';
-import Facebook from '../../public/images/facebook.png';
-import Apple from '../../public/images/apple.png';
+import { assets } from '../assets/assets';
 import {
   Card,
   Input,
@@ -65,9 +63,10 @@ const Login = () => {
   }, [token, navigate]);
 
   const socialIcons = [
-    { src: Google, alt: "Google" },
-    { src: Facebook, alt: "Facebook" },
-    { src: Apple, alt: "Apple" },
+    { src: assets.Google, alt: "Google" },
+    { src: assets.FaceBook, alt: "Facebook" },
+    { src: assets.Apple, alt: "Apple" },
+   
   ];
 
   return (

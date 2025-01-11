@@ -17,7 +17,7 @@ function Header() {
   };
 
   return (
-    <div className="p-4">
+    <div className="p-2">
       {/* Greeting Section */}
       <div className="flex justify-between items-center">
       {token && userData ? (
@@ -26,7 +26,7 @@ function Header() {
            <h5 className="text-gray-600">How are you today?</h5>
          </div>
           ) : (
-            <>
+            <div className="flex items-center gap-2">
               {/* Show logo when not logged in */}
               <img
                 src={assets.DoctLogo}
@@ -34,8 +34,8 @@ function Header() {
                 className="w-12 h-12 cursor-pointer"
                 onClick={() => navigate("/")} // Navigate to the homepage on logo click
               />
-              <h1 className="ml-3 font-bold text-sm md:text-3xl text-[#0284c7]">Doctime</h1>
-            </>
+              <h1 className=" font-bold text-xl md:text-3xl text-[#0284c7]">Doctime</h1>
+            </div>
           )}
         <div className="flex items-center gap-4">
           {/* Notification Icon */}
@@ -95,12 +95,12 @@ function Header() {
       {/* Appointment Booking Section */}
       <div className="flex flex-col md:flex-row flex-wrap bg-primary rounded-lg px-6 md:px-10 lg:px-20 mt-4">
         {/* Left Side */}
-        <Card className="md:w-1/2 flex flex-col items-start justify-center gap-4 py-10 md:py-[10vw] md:mb-[-30px] bg-transparent shadow-none">
+        <Card className="md:w-1/2 flex flex-col items-start justify-center gap-4 py-10 md:py-[10vw] md:mb-[-30px] bg-transparent shadow-none h-72 md:h-[75vh]">
           <CardBody>
-            <p className="text-3xl md:text-4xl lg:text-5xl text-white font-semibold leading-tight">
+            <p className="text-2xl md:text-4xl lg:text-5xl text-white font-semibold leading-tight">
               Book Appointment <br /> with Trusted Doctors
             </p>
-            <div className="flex flex-col md:flex-row items-center gap-3 text-white text-sm font-light">
+            <div className="flex flex-col md:flex-row items-center gap-3 text-white text-sm font-light mt-4 prose">
               <img
                 className="w-28"
                 src={assets.group_profiles}
@@ -114,11 +114,11 @@ function Header() {
             </div>
             <Button
               href="#speciality"
-              className="flex items-center gap-2 bg-white px-8 py-3 rounded-full text-gray-600 text-sm hover:scale-105 transition-all duration-300"
+              className="flex items-center gap-2 bg-white px-8 py-3 rounded-full text-gray-600 text-sm hover:scale-105 transition-all duration-300 mt-6"
             >
               Book appointment{" "}
               <img
-                className="w-3"
+                className="w-4 "
                 src={assets.arrow_icon}
                 alt="Arrow Icon"
               />

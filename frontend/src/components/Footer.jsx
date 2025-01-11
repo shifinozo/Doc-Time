@@ -1,44 +1,103 @@
-import React from 'react'
-import { assets } from '../assets/assets'
+import React from "react";
+import { assets } from "../assets/assets";
+import { Typography } from "@material-tailwind/react";
+
+const LINKS = [
+  {
+    title: "Company",
+    items: ["About us", "News"],
+  },
+  {
+    title: "Product",
+    items: ["Overview", "Features"],
+  },
+  {
+    title: "Resource",
+    items: ["Blog", "Helpcenter"],
+  },
+];
+
+const currentYear = new Date().getFullYear();
 
 const Footer = () => {
   return (
-    <div className='md:mx-10'>
-        <div className='flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 my-10 mt-40 text-sm'>
-            {/* ------Left Section------ */}
-            <div>
-                <img className='mb-5 w-20' src={assets.DoctLogo} alt="" />
-                <p className='w-full md:w-2/3 text-gray-600 dark:text-gray-100     leading-6'>Lorem ipsum, doniet loremon, ipsam iste blanditiis mollitia deserunt autem incidunt minima ipsum explicabo!</p>
+    <footer className="mt-6 relative w-full bg-[#EAEFFF] dark:bg-gray-900 text-gray-600 dark:text-gray-100 py-5">
+      <div className="mx-auto max-w-7xl px-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12">
+          {/* Left Section */}
+          <div>
+            <img className="mb-5 w-20" src={assets.DoctLogo} alt="Doct Logo" />
+            <Typography className="leading-6">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Blanditiis, laborum?
+            </Typography>
+          </div>
 
+          {/* Center Section */}
+          <div className="grid grid-cols-3 gap-6 sm:grid-cols-3">
+            {LINKS.map(({ title, items }) => (
+              <ul key={title}>
+                <Typography variant="small" className="mb-3 font-medium">
+                  {title}
+                </Typography>
+                {items.map((link) => (
+                  <li key={link} className="py-1.5">
+                    <Typography
+                      as="a"
+                      href="#"
+                      className="transition-colors hover:text-blue-500"
+                    >
+                      {link}
+                    </Typography>
+                  </li>
+                ))}
+              </ul>
+            ))}
+          </div>
+
+          {/* Right Section */}
+          <div>
+            <Typography variant="h6" className="mb-3">
+              Get in Touch
+            </Typography>
+            <Typography>+91 0023948989</Typography>
+            <Typography>DocTime@gmail.com</Typography>
+            <div className="flex gap-4 mt-3">
+              <a
+                href="https://github.com/Shifin-Malik/Doc-Time"
+                className="hover:opacity-80"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  className="h-6 w-6"
+                  src={assets.Github}
+                  alt="GitHub Logo"
+                />
+              </a>
+              <a href="#" className="hover:opacity-80">
+                <img
+                  className="h-6 w-6"
+                  src={assets.FaceBook}
+                  alt="Doct Logo"
+                />
+              </a>
+              <a href="#" className="hover:opacity-80">
+                <img className="h-6 w-6" src={assets.Google} alt="Doct Logo" />
+              </a>
             </div>
-             {/* ------Center Section------ */}
-             <div>
-                <p className='text-xl font-medium mb-5 dark:text-white'>COMPANY</p>
-                <ul className='flex flex-col gap-2 text-gray-600 dark:text-gray-100   '>
-                    <p>Home</p>
-                    <p>About us</p>
-                    <p>Contact us</p>
-                    <p>Privacy Policy</p>
-                </ul>          
-             </div>
-          {/* ------Right Section------ */}
-            <div>
-                <p className='text-xl font-medium mb-5 dark:text-white'>GET IN TOUCH</p>
-                <ul className='flex flex-col gap-2 text-gray-600 dark:text-gray-100   '>
-                    <li>+91 0023948989</li>
-                    <li>DocTime@gmail.com</li>
-                </ul>
-            </div>
-
-        </div>
-        {/* -------CopyRight Text ------------ */}
-        <div>
-            <hr />
-            <p className='py-5 text-sm text-center dark:text-gray-100'>Copyright 2024@ DocTime - All Right Reserved.</p>
+          </div>
         </div>
 
-    </div>
-  )
-}
+        {/* Footer Bottom */}
+        <div className="border-t border-gray-200 dark:border-gray-700 text-center">
+          <Typography variant="small">
+            &copy; {currentYear} DocTime - All Rights Reserved.
+          </Typography>
+        </div>
+      </div>
+    </footer>
+  );
+};
 
-export default Footer
+export default Footer;

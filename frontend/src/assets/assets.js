@@ -40,8 +40,10 @@ import Pediatricians from './Pediatricians1.png'
 import Dent from './dent.png'
 import Intestine from './intestine.png'
 import Oncology from './oncology.png'
-
-
+import Github from './github.png'
+import FaceBook from './facebook.png'
+import Google from './google.png'
+import Apple from './apple.png'
 export const assets = {
     Doct,
     DoctLogo,
@@ -60,7 +62,11 @@ export const assets = {
     dropdown_icon,
     upload_icon,
     stripe_logo,
-    razorpay_logo
+    razorpay_logo,
+    Github,
+    FaceBook,
+    Google,
+    Apple
 }
 
 export const specialityData = [

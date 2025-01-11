@@ -26,13 +26,13 @@ const Banner = () => {
         </div>
 
         {/* Button Section */}
-        <div className="absolute bottom-10 md:bottom-24 left-8 md:left-40 lg:left-20">
+        <div className="absolute bottom-8 md:bottom-24 left-8 md:left-40 lg:left-20">
           <Button
             onClick={() => {
               navigate("/login");
               scrollTo(0, 0);
             }}
-            className="md:w-36 md:h-10 w-28 p-2 bg-white text-primary text-sm hover:scale-105 transition-all"
+            className="md:w-40  md:h-10 w-40 p-2  bg-white text-primary text-sm hover:scale-105 transition-all"
           >
             Create Account
           </Button>
