@@ -13,7 +13,7 @@ import Appointment from "./pages/Appointment";
 import GettingStarted from "./pages/GettingStarted";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Booking from "./pages/Booking";
+
 
 function App() {
   return (
@@ -33,7 +33,7 @@ function App() {
             <Route path="my-profile" element={<MyProfile />} />
             <Route path="my-appointments" element={<MyAppointments />} />
             <Route path="appointment/:docId" element={<Appointment />} />
-            <Route path="booking" element={<Booking/>} />
+            
           </Route>
         </Routes>
       </div>

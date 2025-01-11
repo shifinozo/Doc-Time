@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import DocLogo from "../../public/images/doclogo.png";
+import { assets } from '../assets/assets'
 import LottieAnimation from "./LottieAnimation";
 
 
@@ -34,7 +34,7 @@ function LoadingAnimation() {
           className="flex flex-col items-center animate-pulse dark:bg-gray-900"
         >
           <img
-            src={DocLogo}
+            src={assets.DoctLogo}
             alt="Loading Icon"
             className="w-80 h-80 object-contain"
           />

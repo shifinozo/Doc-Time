@@ -14,7 +14,7 @@ const TopDoctors = () => {
   const displayedDoctors = showAll ? doctors : doctors.slice(0, 3);
 
   return (
-    <div className="flex flex-col my-6 text-[#262626] md:mx-10">
+    <div className="flex flex-col my-6 text-[#262626] ">
       {/* Title Section */}
       <div className="flex justify-between items-center px-3 sm:px-0">
         <h1 className=" text-xl md:text-3xl font-bold">Recommendation Doctor</h1>
