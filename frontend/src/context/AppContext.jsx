@@ -8,7 +8,6 @@ const AppContextProvider = (props) => {
 
     const currencySymbol = '₹'
     const backendUrl = import.meta.env.VITE_BACKEND_URL
-
     const [doctors, setDoctors] = useState([])
     const [token, setToken] = useState(localStorage.getItem('token') ? localStorage.getItem('token') : '')
     const [userData, setUserData] = useState(false)
@@ -17,7 +16,6 @@ const AppContextProvider = (props) => {
     const getDoctosData = async () => {
 
         try {
-
             const { data } = await axios.get(backendUrl + '/api/doctor/list')
             if (data.success) {
                 setDoctors(data.doctors)
@@ -29,9 +27,7 @@ const AppContextProvider = (props) => {
             console.log(error)
             toast.error(error.message)
         }
-
-    }
-
+    }    
     // Getting User Profile using API
     const loadUserProfileData = async () => {
 
@@ -77,5 +73,4 @@ const AppContextProvider = (props) => {
     )
 
 }
-
 export default AppContextProvider

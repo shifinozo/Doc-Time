@@ -44,8 +44,10 @@ import Github from './github.png'
 import FaceBook from './facebook.png'
 import Google from './google.png'
 import Apple from './apple.png'
+import Telegram from './telegram.png'
 export const assets = {
     Doct,
+    Telegram,
     DoctLogo,
     header_img,
     group_profiles,

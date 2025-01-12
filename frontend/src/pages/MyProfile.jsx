@@ -124,7 +124,6 @@ const MyProfile = () => {
       icon: <img src={Translate} alt="User Icon" className="h-10 w-10 bg-[#eaf2ff] p-2 rounded-full border border-[#eaf2ff]" />,
       onClick: () => console.log("Change Language clicked"),
     },
-   
   ];
 
   return userData ? (
