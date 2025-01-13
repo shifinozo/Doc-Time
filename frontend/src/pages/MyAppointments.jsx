@@ -4,13 +4,13 @@ import { AppContext } from "../context/AppContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { assets } from "../assets/assets";
-import { Card,Button } from "@material-tailwind/react";
+import { Card, Button , Carousel  } from "@material-tailwind/react";
 import { CiClock2 } from "react-icons/ci";
 import { CiCalendarDate } from "react-icons/ci";
-import { MdKeyboardArrowRight } from "react-icons/md";
 import { PiChatCenteredTextFill } from "react-icons/pi";
 const MyAppointments = () => {
-  const { backendUrl, token } = useContext(AppContext);
+  const { backendUrl, token ,doctors } = useContext(AppContext);
+
   const navigate = useNavigate();
   const [appointments, setAppointments] = useState([]);
   const [payment, setPayment] = useState("");
@@ -140,9 +140,10 @@ const MyAppointments = () => {
     }
   }, [token]);
 
-  const upcomingAppointments = appointments.filter(
-    (app) => !app.cancelled && !app.isCompleted
-  );
+  
+const upcomingAppointments = appointments.filter(
+  (app) => !app.cancelled && !app.isCompleted
+);
   const paymentSuccessAppointments = appointments.filter(
     (app) => !app.cancelled && app.isCompleted
   );
@@ -151,7 +152,7 @@ const MyAppointments = () => {
   );
 
   return (
-    <div className="mx-5 md:mx-10">
+    <div className="mx-4 md:mx-10">
       <div className="flex items-center justify-center">
         <p className="pb-3 mt-8 text-xl md:text-3xl font-bold text-black border-b">
           My Appointments
@@ -161,15 +162,18 @@ const MyAppointments = () => {
       {/* Upcoming Appointments */}
 
       <div className="mt-2">
+      <Carousel>
+        
         {upcomingAppointments.length === 0 ? (
           <p className="text-sm text-gray-600">No Appointments.</p>
         ) : (
           upcomingAppointments.map((item, index) => (
-            <Card className="w-full h-auto px-4 md:px-14 md:w-[100vh] rounded-3xl bg-primary mt-4 md:text-2xl text-sm text-white font-medium">
+            <div className="flex ">
+              <Card className="w-full h-auto px-4 md:px-14  rounded-3xl bg-primary mt-4 md:text-2xl text-sm text-white font-medium">
               {/* Header Section */}
               <div className="flex justify-between items-center mt-3">
                 <h2 className="mt-2 text-lg font-bold">Appointments</h2>
-                <MdKeyboardArrowRight className="text-2xl md:text-4xl" />
+                
               </div>
 
               {/* Date and Time */}
@@ -185,18 +189,26 @@ const MyAppointments = () => {
                   </p>
                 </div>
                 <img
-                  className="w-16 h-16 rounded-full object-cover"
+                  className="w-14 h-14 rounded-full object-cover"
                   src={assets.Telegram}
                   alt="Appointment Icon"
                 />
               </div>
 
               {/* Doctor Details Section */}
-              <div className="mt-2 mb-4 flex items-center justify-between gap-4 bg-white px-4 h-20 md:w-[80vh] rounded-lg">
+              <div
+                className="mt-2 mb-4 flex items-center justify-between gap-4 bg-white px-4 h-20 md:mx-72 md:w-[100vh] rounded-lg cursor-pointer"
+                onClick={() => {
+                  navigate(`/appointment/${item._id}`);
+                  scrollTo(0, 0);
+                }}
+                key={index}
+              >
+                
                 {/* Doctor Image */}
                 <div className="flex items-center gap-4">
                   <img
-                    className="w-16 h-16 rounded-full bg-green-500 object-cover text-black"
+                    className="w-14 h-14 rounded-full bg-[#78716c] object-cover text-black"
                     src={item.docData.image}
                     alt={`Dr. ${item.docData.name}`}
                   />
@@ -205,20 +217,22 @@ const MyAppointments = () => {
                     <p className="text-lg font-semibold text-black">
                       {item.docData.name}
                     </p>
-                    <p>{item.docData.speciality}</p>
+                    <p className="text-gray-500">{item.docData.speciality}</p>
                   </div>
                 </div>
                 {/* Icon */}
                 <PiChatCenteredTextFill className="size-8 text-black" />
+                
               </div>
-              <div className="flex mb-4 gap-2 justify-center text-sm text-center">
+
+              <div className="flex mb-10 gap-2 justify-center text-sm text-center">
                 {!item.payment &&
                   !item.cancelled &&
                   !item.isCompleted &&
                   payment !== item._id && (
                     <Button
                       onClick={() => setPayment(item._id)}
-                      className=" sm:min-w-32  py-3 border rounded-lg bg-green-500 text-white transition-all duration-300"
+                      className=" sm:min-w-32  p-3 border rounded-lg bg-green-500 text-white transition-all duration-300"
                     >
                       Pay Online
                     </Button>
@@ -230,7 +244,7 @@ const MyAppointments = () => {
                     <>
                       <Button
                         onClick={() => appointmentStripe(item._id)}
-                        className="text-[#696969] sm:min-w-32 bg-white py-0 border rounded hover:bg-gray-100 transition-all flex items-center justify-center"
+                        className="text-[#696969] sm:min-w-20 p-2 bg-white py-0 border rounded hover:bg-gray-100 transition-all flex items-center justify-center"
                       >
                         <img
                           className="max-w-10 max-h-7"
@@ -240,7 +254,7 @@ const MyAppointments = () => {
                       </Button>
                       <Button
                         onClick={() => appointmentRazorpay(item._id)}
-                        className="text-[#696969] sm:min-w-32 py-0 bg-white border rounded hover:bg-gray-100 transition-all flex items-center justify-center"
+                        className="text-[#696969] sm:min-w-20 p-2 bg-white border rounded hover:bg-gray-100 transition-all flex items-center justify-center"
                       >
                         <img
                           className="max-w-10 max-h-7"
@@ -252,14 +266,17 @@ const MyAppointments = () => {
                   )}
                 <Button
                   onClick={() => cancelAppointment(item._id)}
-                  className=" sm:min-w-32  py-3 border rounded-lg bg-red-500 text-white transition-all duration-300"
+                  className=" sm:min-w-32  p-3 border rounded-lg bg-red-500 text-white transition-all duration-300"
                 >
                   Cancel Appointment
                 </Button>
+                
               </div>
             </Card>
+            </div>
           ))
         )}
+         </Carousel>
       </div>
       {/* Payment Success Appointments */}
       <div>
