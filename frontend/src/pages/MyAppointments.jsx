@@ -218,6 +218,7 @@ const upcomingAppointments = appointments.filter(
                       {item.docData.name}
                     </p>
                     <p className="text-gray-500">{item.docData.speciality}</p>
+                    
                   </div>
                 </div>
                 {/* Icon */}
@@ -225,7 +226,7 @@ const upcomingAppointments = appointments.filter(
                 
               </div>
 
-              <div className="flex mb-10 gap-2 justify-center text-sm text-center">
+              <div className="flex mb-10  gap-2 justify-center text-sm text-center">
                 {!item.payment &&
                   !item.cancelled &&
                   !item.isCompleted &&
@@ -328,7 +329,7 @@ const upcomingAppointments = appointments.filter(
             >
               <div>
                 <img
-                  className="w-36 bg-[#EAEFFF]"
+                  className="w-32 rounded-full bg-[#EAEFFF]"
                   src={item.docData.image}
                   alt=""
                 />

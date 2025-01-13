@@ -7,22 +7,25 @@ import {
   Avatar,
   Button,
   Input,
-  Tooltip,
-  Select,
   Option,
+  Select,
   Dialog,
   DialogHeader,
   DialogBody,
   DialogFooter,
 } from "@material-tailwind/react";
-import Setting from '../../public/images/settings.png'
-import Share from '../../public/images/share.png'
-import User from '../../public/images/user1.png'
-import Calendar from '../../public/images/calendar.png'
-import Padlock from '../../public/images/padlock.png'
-import Translate from '../../public/images/translate.png'
-import Right from '../../public/images/right.png'
-import { List, ListItem, ListItemPrefix, ListItemSuffix } from "@material-tailwind/react";
+import User from "../../public/images/user1.png";
+import Calendar from "../../public/images/calendar.png";
+import Padlock from "../../public/images/padlock.png";
+import Translate from "../../public/images/translate.png";
+import Right from "../../public/images/right.png";
+import Settings from '../../public/images/settingss.png';
+import {
+  List,
+  ListItem,
+  ListItemPrefix,
+  ListItemSuffix,
+} from "@material-tailwind/react";
 
 // Reusable Input Component
 const FieldInput = ({ label, value, onChange, type = "text", isEdit }) => (
@@ -44,8 +47,6 @@ const FieldInput = ({ label, value, onChange, type = "text", isEdit }) => (
   </div>
 );
 
-
-
 const MyProfile = () => {
   const navigate = useNavigate();
   const [isEdit, setIsEdit] = useState(false);
@@ -53,7 +54,6 @@ const MyProfile = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const { token, backendUrl, userData, setUserData, loadUserProfileData } =
     useContext(AppContext);
-    
 
   // Handle input changes
   const handleInputChange = (field, value) => {
@@ -105,83 +105,116 @@ const MyProfile = () => {
   const buttons = [
     {
       label: "My Profile",
-      icon: <img src={User} alt="User Icon" className="h-10 w-10 bg-[#eaf2ff] p-2 rounded-full border border-[#eaf2ff]" />,
+      icon: (
+        <img
+          src={User}
+          alt="User Icon"
+          className="h-10 w-10 bg-[#eaf2ff] p-2 rounded-full border border-[#eaf2ff]"
+        />
+      ),
       onClick: () => setDialogOpen(true),
     },
     {
       label: "Appointment History",
-      icon: <img src={Calendar} alt="User Icon" className="h-10 w-10 bg-[#eaf2ff] p-2 rounded-full border border-[#eaf2ff]" />,
+      icon: (
+        <img
+          src={Calendar}
+          alt="User Icon"
+          className="h-10 w-10 bg-[#eaf2ff] p-2 rounded-full border border-[#eaf2ff]"
+        />
+      ),
       onClick: () => navigate("/my-appointments"),
     },
-    
+
     {
       label: "Change Password",
-      icon: <img src={Padlock} alt="User Icon" className="h-10 w-10 bg-[#eaf2ff] p-2 rounded-full border border-[#eaf2ff]" />,
+      icon: (
+        <img
+          src={Padlock}
+          alt="User Icon"
+          className="h-10 w-10 bg-[#eaf2ff] p-2 rounded-full border border-[#eaf2ff]"
+        />
+      ),
       onClick: () => console.log("Change Password clicked"),
     },
     {
       label: "Change Language",
-      icon: <img src={Translate} alt="User Icon" className="h-10 w-10 bg-[#eaf2ff] p-2 rounded-full border border-[#eaf2ff]" />,
+      icon: (
+        <img
+          src={Translate}
+          alt="User Icon"
+          className="h-10 w-10 bg-[#eaf2ff] p-2 rounded-full border border-[#eaf2ff]"
+        />
+      ),
       onClick: () => console.log("Change Language clicked"),
+    },
+    {
+      label: "Settings",
+      icon: (
+        <img
+          src={Settings}
+          alt="User Icon"
+          className="h-10 w-10 bg-[#eaf2ff] p-2 rounded-full border border-[#eaf2ff]"
+        />
+      ),
+     
     },
   ];
 
   return userData ? (
-    <div className="flex flex-col fixed items-center w-full  text-white min-h-screen overflow-auto bg-[#eaf2ff] ">
-      {/* Profile Header */}
-      <div className="relative flex flex-col items-center pt-10 rounded-3xl w-full h-32">
-      <div className="absolute top-4 right-5 flex gap-2">
-  <Tooltip content="Share Profile">
-    <button className="hover:text-gray-600">
-      <img src={Share} alt="Share Profile" className="h-6 w-6" />
-    </button>
-  </Tooltip>
-  <Tooltip content="Settings">
-    <button className="hover:text-gray-600">
-      <img src={Setting} alt="Settings" className="h-6 w-6" />
-    </button>
-  </Tooltip>
-</div>
-        <Avatar
-          className="w-28 h-28 rounded-full"
-          src={image ? URL.createObjectURL(image) : userData.image || "/default-avatar.png"}
-        />
-       
-        <div className="text-center pt-2">
-          <FieldInput
-            value={userData.name}
-            
+    <div className="flex flex-col fixed items-center w-full   text-white min-h-screen  overflow-auto ">
+      <div className="flex flex-col items-start pt-4">
+        {/* Profile Header */}
+        
+
+        {/* Profile Image and Details */}
+        <div className="flex items-center space-x-10 pt-10">
+          {/* Profile Image */}
+          <Avatar
+            className="w-20 h-20 rounded-full"
+            src={
+              image
+                ? URL.createObjectURL(image)
+                : userData.image || "/default-avatar.png"
+            }
           />
+
+          {/* Profile Details */}
+          <div>
+            <div className="text-black font-bold text-2xl">
+              <FieldInput value={userData.name} className="" />
+            </div>
+            <p className="text-gray-500 font-semibold text-lg">
+              {userData.email}
+            </p>
+          </div>
         </div>
-        <p className="flex items-center text-black ">
-         <span className="ml-2 text-gray-700">{userData.email}</span>
-        </p>
       </div>
 
       {/* Action Buttons */}
-     
-      <div className="flex flex-col items-start gap-4 mt-20 pt-4 md:pl-20 pl-6 w-full min-h-screen overflow-auto rounded-t-2xl bg-white">
-  <h1 className="text-black max-w-prose font-bold">Account Overview</h1>
-  <List className="w-full md:w-[90%] bg-transparent">
-    {buttons.map((button, index) => (
-      <ListItem
-        key={index}
-        onClick={button.onClick}
-        className="h-14 flex items-center justify-between px-6 hover:bg-gray-100 cursor-pointer"
-      >
-        <ListItemPrefix>
-          <div className="flex items-center gap-4">
-            {button.icon}
-            <span className="text-black">{button.label}</span>
-          </div>
-        </ListItemPrefix>
-        <ListItemSuffix>
-          <img src={Right} alt="Right Arrow" className="h-6 w-6" />
-        </ListItemSuffix>
-      </ListItem>
-    ))}
-  </List>
-</div>
+
+      <div className="flex flex-col items-start gap-4 mt-10 pt-4 md:pl-20 pl-6 w-full min-h-screen overflow-auto rounded-t-2xl bg-white">
+        <h1 className="text-black max-w-prose font-bold">Account Overview</h1>
+        <List className="w-full md:w-[90%] bg-transparent">
+          {buttons.map((button, index) => (
+            <ListItem
+              key={index}
+              onClick={button.onClick}
+              className="h-14 flex items-center justify-between px-6 hover:bg-gray-100 cursor-pointer"
+            >
+              <ListItemPrefix>
+                <div className="flex items-center gap-4">
+                  {button.icon}
+                  <span className="text-black">{button.label}</span>
+                </div>
+              </ListItemPrefix>
+              <ListItemSuffix>
+                <img src={Right} alt="Right Arrow" className="h-6 w-6" />
+              </ListItemSuffix>
+            </ListItem>
+          ))}
+        </List>
+      </div>
       {/* Dialog for My Profile */}
       <Dialog open={dialogOpen} handler={setDialogOpen} size="sm" className="max-h-[90vh]">
   <DialogHeader>User Profile Details</DialogHeader>
@@ -194,6 +227,12 @@ const MyProfile = () => {
       <Input type="file" accept="image/*" className="mt-2" onChange={handleImageUpload} />
     )}
     <div className="flex flex-col gap-1">
+    <FieldInput
+        label="Phone"
+        value={userData.name}
+        onChange={(e) => handleInputChange("name", e.target.value)}
+        isEdit={isEdit}
+      />
       <FieldInput
         label="Phone"
         value={userData.phone}
@@ -253,9 +292,8 @@ const MyProfile = () => {
 
 
 </Dialog>
-
-
     </div>
+    
   ) : null;
 };
 
