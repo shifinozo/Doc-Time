@@ -45,9 +45,9 @@ function BotDialog() {
       <Dialog
         open={open}
         handler={toggleDialog}
-        className="fixed top-10 bg-white rounded-lg shadow-md"
+        className="fixed top-5 bg-white rounded-lg shadow-md"
       >
-        <div className="flex flex-col h-[80vh] max-h-[80vh]">
+        <div className="flex flex-col h-[70vh] max-h-[80vh]">
           {/* Header */}
           <div className="flex items-center justify-between px-3 py-2 border-b">
             <img src={assets.Robot} alt="Robot Icon" className="w-10 h-10" />
@@ -83,7 +83,7 @@ function BotDialog() {
                 <div
                   className={`md:px-10 md:py-2 px-8 py-1 rounded-tl-[13px] rounded-tr-[13px] rounded-bl-[3px] rounded-br-[13px] max-w-xs ${
                     msg.sender === "user"
-                      ? "bg-blue-500 text-white"
+                      ? "bg-blue-500 text-white rounded-tl-[13px] rounded-tr-[13px] rounded-bl-[13px] rounded-br-[3px]"
                       : "bg-black text-white"
                   }`}
                 >
