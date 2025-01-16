@@ -3,7 +3,6 @@ import Header from "../components/Header"
 import SpecialityMenu from "../components/SpecialtyMenu"
 import TopDoctors from "../components/TopDoctors"
 import Banner from "../components/Banner"
-
 import Footer from "../components/Footer"
 
 const Home = () => {

@@ -45,9 +45,11 @@ import FaceBook from './facebook.png'
 import Google from './google.png'
 import Apple from './apple.png'
 import Telegram from './telegram.png'
+import Robot from './robot.png'
 export const assets = {
     Doct,
     Telegram,
+    Robot,
     DoctLogo,
     header_img,
     group_profiles,
