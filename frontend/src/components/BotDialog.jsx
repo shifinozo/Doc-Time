@@ -6,7 +6,7 @@ import {
   DialogBody,
   DialogFooter,
 } from "@material-tailwind/react";
-import { assets } from '../assets/assets'
+import { assets } from "../assets/assets";
 import { MdOutlineKeyboardDoubleArrowDown } from "react-icons/md";
 import { FaArrowUp } from "react-icons/fa";
 
@@ -15,7 +15,15 @@ function BotDialog() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
 
-  const toggleDialog = () => setOpen((prev) => !prev);
+  const toggleDialog = () => {
+    setOpen((prev) => !prev);
+    // Add first bot message when opening for the first time
+    if (!open && messages.length === 0) {
+      setMessages([
+        { text: "Hey there! How can I help?", sender: "bot" },
+      ]);
+    }
+  };
 
   const sendMessage = () => {
     if (input.trim()) {
@@ -25,7 +33,7 @@ function BotDialog() {
       setTimeout(() => {
         setMessages((prev) => [
           ...prev,
-          { text: "Hey there! How can I help?", sender: "bot" },
+          { text: "Thinking...", sender: "bot" },
         ]);
       }, 1000);
     }
@@ -81,10 +89,10 @@ function BotDialog() {
                   </div>
                 )}
                 <div
-                  className={`md:px-10 md:py-2 px-8 py-1 rounded-tl-[13px] rounded-tr-[13px] rounded-bl-[3px] rounded-br-[13px] max-w-xs ${
+                  className={`md:px-10 md:py-2 px-8 py-1 max-w-xs ${
                     msg.sender === "user"
                       ? "bg-blue-500 text-white rounded-tl-[13px] rounded-tr-[13px] rounded-bl-[13px] rounded-br-[3px]"
-                      : "bg-black text-white"
+                      : "bg-black text-white rounded-tl-[13px] rounded-tr-[13px] rounded-bl-[3px] rounded-br-[13px]"
                   }`}
                 >
                   {msg.text}
