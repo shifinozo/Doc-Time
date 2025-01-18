@@ -40,7 +40,7 @@ const SpecialityMenu = () => {
               src={item.image}
               alt={`${item.speciality} icon`}
             />
-            <p className="mt-2 text-center font-medium">{item.speciality}</p>
+            
           </Link>
         ))}
       </div>
