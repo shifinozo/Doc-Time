@@ -73,7 +73,7 @@ function BotDialog() {
 
   const ChatMessage = ({ chat }) => (
     <div
-      className={`flex items-center gap-3 ${
+      className={`flex items-center gap-2 pt-4 ${
         chat.role === "model" ? "flex-row" : "flex-row-reverse"
       }`}
     >
@@ -88,7 +88,7 @@ function BotDialog() {
         </div>
       )}
       <p
-        className={`p-3 rounded-lg max-w-[75%] break-words ${
+        className={`md:p-4 p-2 px-8 md:px-12 rounded-lg max-w-[75%] break-words ${
           chat.role === "model"
             ? "bg-gray-100 text-gray-800 rounded-bl-none"
             : "bg-[#0099ff] text-white rounded-br-none"
@@ -113,9 +113,9 @@ function BotDialog() {
         handler={() => setOpen(!open)}
         className="bg-white rounded-lg shadow-md overflow-hidden"
       >
-        <DialogHeader className="bg-[#0099ff] text-white flex items-center justify-between p-4">
+        <DialogHeader className="bg-[#0099ff] text-white flex items-center justify-between p-3">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-white text-purple-500 rounded-full">
+            <div className="w-10 h-10 bg-white  rounded-full">
               <img src={assets.Robot} alt="Robot Icon" className="w-10 h-10" />
             </div>
             <h2 className="text-lg font-semibold">Chatbot</h2>
@@ -125,7 +125,7 @@ function BotDialog() {
 
         <DialogBody
           ref={chatBodyRef}
-          className="flex-1 p-4 h-[460px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
+          className="flex-1 p-3 h-[420px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
         >
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 flex items-center justify-center bg-[#0099ff] rounded-full">
@@ -141,26 +141,27 @@ function BotDialog() {
           ))}
         </DialogBody>
 
-        <DialogFooter className="p-4 bg-gray-100">
-          <form
-            className="flex items-center bg-white rounded-full shadow-md focus-within:ring focus-within:ring-[#0099ff]"
-            onSubmit={handleFormSubmit}
-          >
-            <input
-              ref={inputRef}
-              type="text"
-              placeholder="Message..."
-              className="flex-1 bg-transparent px-4 py-2 text-gray-700 outline-none"
-              required
-            />
-            <button
-              type="submit"
-              className="w-10 h-10 flex items-center justify-center bg-[#0099ff] text-white rounded-full hover:bg-purple-600 transition"
-            >
-              <IoIosArrowUp size={20} />
-            </button>
-          </form>
-        </DialogFooter>
+        <DialogFooter className="p-3 bg-gray-100 flex justify-center items-center">
+  <form
+    className="flex items-center justify-between bg-white rounded-full shadow-md focus-within:ring focus-within:ring-[#0099ff] w-full max-w-md"
+    onSubmit={handleFormSubmit}
+  >
+    <input
+      ref={inputRef}
+      type="text"
+      placeholder="Message..."
+      className="flex-1 bg-transparent px-7 py-2 text-gray-700 outline-none"
+      required
+    />
+    <button
+      type="submit"
+      className="w-10 h-10 flex items-center justify-center bg-[#0099ff] text-white rounded-full transition"
+    >
+      <IoIosArrowUp size={20} />
+    </button>
+  </form>
+</DialogFooter>
+
       </Dialog>
     </div>
   );
