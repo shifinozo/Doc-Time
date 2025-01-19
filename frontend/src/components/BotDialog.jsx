@@ -111,7 +111,7 @@ function BotDialog() {
       <Dialog
         open={open}
         handler={() => setOpen(!open)}
-        className="bg-white rounded-lg shadow-md overflow-hidden"
+        className="bg-white rounded-lg shadow-md overflow-hidden absolute top-3"
       >
         <DialogHeader className="bg-[#0099ff] text-white flex items-center justify-between p-3">
           <div className="flex items-center gap-3">
@@ -125,7 +125,7 @@ function BotDialog() {
 
         <DialogBody
           ref={chatBodyRef}
-          className="flex-1 p-3 h-[420px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
+          className="flex-1 p-3 h-[430px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
         >
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 flex items-center justify-center bg-[#0099ff] rounded-full">
