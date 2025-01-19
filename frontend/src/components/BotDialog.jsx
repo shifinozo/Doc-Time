@@ -40,6 +40,7 @@ function BotDialog() {
       updateHistory(apiResponseText);
     } catch (error) {
       console.error(error);
+      updateHistory("Oops! Too many requests. Please wait and try again.");
     }
   };
 
@@ -125,7 +126,7 @@ function BotDialog() {
 
         <DialogBody
           ref={chatBodyRef}
-          className="flex-1 p-3 h-[430px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
+          className="flex-1 p-3 h-[420px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
         >
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 flex items-center justify-center bg-[#0099ff] rounded-full">
