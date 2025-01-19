@@ -8,11 +8,12 @@ import Footer from "../components/Footer"
 const Home = () => {
   return (
     <div className="dark:bg-gray-900 mx-4 md:mx-12  text-[#262626]">
+  
       <Header />
       <SpecialityMenu />
       <TopDoctors />
       <Banner />
-      <Footer />
+      <Footer />  
     </div>
   )
 }

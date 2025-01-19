@@ -1,136 +1,166 @@
-import React, { useState } from "react";
-import {
-  Button,
-  Dialog,
-  DialogHeader,
-  DialogBody,
-  DialogFooter,
-} from "@material-tailwind/react";
+import React, { useState, useRef, useEffect } from "react";
 import { assets } from "../assets/assets";
-import { MdOutlineKeyboardDoubleArrowDown } from "react-icons/md";
-import { FaArrowUp } from "react-icons/fa";
+import { Dialog, DialogHeader, DialogBody, DialogFooter } from "@material-tailwind/react";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { Button } from "@material-tailwind/react";
 
 function BotDialog() {
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState([]);
-  const [input, setInput] = useState("");
+  const [chatHistory, setChatHistory] = useState([]);
+  const chatBodyRef = useRef();
+  const inputRef = useRef();
+  const userProfile = "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"; // Add the user profile image URL here
 
-  const toggleDialog = () => {
-    setOpen((prev) => !prev);
-    // Add first bot message when opening for the first time
-    if (!open && messages.length === 0) {
-      setMessages([
-        { text: "Hey there! How can I help?", sender: "bot" },
+  const generateBotResponse = async (history) => {
+    const updateHistory = (text) => {
+      setChatHistory((prev) => [
+        ...prev.filter((msg) => msg.text !== "Thinking..."),
+        { role: "model", text },
       ]);
+    };
+
+    history = history.map(({ role, text }) => ({ role, parts: [{ text }] }));
+
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ contents: history }),
+    };
+
+    try {
+      const response = await fetch(import.meta.env.VITE_API_URL, requestOptions);
+      const data = await response.json();
+      if (!response.ok)
+        throw new Error(data.error.message || "Something went wrong!");
+
+      const apiResponseText = data.candidates[0].content.parts[0].text
+        .replace(/\*\*(.*?)\*\*/g, "$1")
+        .trim();
+
+      updateHistory(apiResponseText);
+    } catch (error) {
+      console.error(error);
     }
   };
 
-  const sendMessage = () => {
-    if (input.trim()) {
-      setMessages((prev) => [...prev, { text: input, sender: "user" }]);
-      setInput("");
-      // Simulating a bot response after sending user message
-      setTimeout(() => {
-        setMessages((prev) => [
-          ...prev,
-          { text: "Thinking...", sender: "bot" },
-        ]);
-      }, 1000);
-    }
+  useEffect(() => {
+    chatBodyRef.current?.scrollTo({
+      top: chatBodyRef.current.scrollHeight,
+      behavior: "smooth",
+    });
+  }, [chatHistory]);
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const userMessage = inputRef.current.value.trim();
+    if (!userMessage) return;
+    inputRef.current.value = "";
+
+    setChatHistory((history) => [
+      ...history,
+      { role: "user", text: userMessage },
+    ]);
+
+    setTimeout(() => {
+      setChatHistory((history) => [
+        ...history,
+        { role: "model", text: "Thinking..." },
+      ]);
+
+      generateBotResponse([...chatHistory, { role: "user", text: userMessage }]);
+    }, 600);
   };
+
+  const ChatMessage = ({ chat }) => (
+    <div
+      className={`flex items-center gap-3 ${
+        chat.role === "model" ? "flex-row" : "flex-row-reverse"
+      }`}
+    >
+      {chat.role === "model" && (
+        <div className="w-10 h-10 flex items-center justify-center bg-[#0099ff] rounded-full">
+          <img src={assets.Robot} alt="Robot Icon" className="w-10 h-10" />
+        </div>
+      )}
+      {chat.role === "user" && (
+        <div className="w-10 h-10 flex items-center justify-center">
+          <img src={userProfile} alt="User Avatar" className="w-10 h-10 rounded-full" />
+        </div>
+      )}
+      <p
+        className={`p-3 rounded-lg max-w-[75%] break-words ${
+          chat.role === "model"
+            ? "bg-gray-100 text-gray-800 rounded-bl-none"
+            : "bg-[#0099ff] text-white rounded-br-none"
+        }`}
+      >
+        {chat.text}
+      </p>
+    </div>
+  );
 
   return (
-    <div className="flex flex-col items-center">
-      {/* Trigger Button */}
+    <div className="flex justify-center items-center min-h-screen">
       <Button
-        onClick={toggleDialog}
+        onClick={() => setOpen(true)}
         className="flex items-center justify-center rounded-full w-16 h-16 p-2 bg-gray-200 hover:bg-gray-300"
       >
         <img src={assets.Robot} alt="Robot Icon" className="w-10 h-10" />
       </Button>
 
-      {/* Dialog */}
       <Dialog
         open={open}
-        handler={toggleDialog}
-        className="fixed top-5 bg-white rounded-lg shadow-md"
+        handler={() => setOpen(!open)}
+        className="bg-white rounded-lg shadow-md overflow-hidden"
       >
-        <div className="flex flex-col h-[70vh] max-h-[80vh]">
-          {/* Header */}
-          <div className="flex items-center justify-between px-3 py-2 border-b">
-            <img src={assets.Robot} alt="Robot Icon" className="w-10 h-10" />
-            <DialogHeader className="text-xl text-gray-700 font-semibold">
-              DocTime ChatBot
-            </DialogHeader>
-            <MdOutlineKeyboardDoubleArrowDown
-              onClick={toggleDialog}
-              className="text-gray-500 w-6 h-6 cursor-pointer"
-            />
+        <DialogHeader className="bg-[#0099ff] text-white flex items-center justify-between p-4">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-white text-purple-500 rounded-full">
+              <img src={assets.Robot} alt="Robot Icon" className="w-10 h-10" />
+            </div>
+            <h2 className="text-lg font-semibold">Chatbot</h2>
+          </div>
+          <IoIosArrowDown size={24} onClick={() => setOpen(false)} className="cursor-pointer" />
+        </DialogHeader>
+
+        <DialogBody
+          ref={chatBodyRef}
+          className="flex-1 p-4 h-[460px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
+        >
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 flex items-center justify-center bg-[#0099ff] rounded-full">
+              <img src={assets.Robot} alt="Robot Icon" className="w-10 h-10" />
+            </div>
+            <p className="p-3 bg-gray-100 text-gray-800 rounded-lg max-w-[75%] rounded-bl-none">
+              Hello! How can I help you today?
+            </p>
           </div>
 
-          {/* Dialog Body */}
-          <DialogBody className="flex-1 px-4 py-5 text-gray-600 overflow-y-auto space-y-4">
-            {messages.map((msg, index) => (
-              <div
-                key={index}
-                className={`flex items-start space-x-3 ${
-                  msg.sender === "user" ? "justify-end" : "justify-start"
-                }`}
-              >
-                {msg.sender !== "user" && (
-                  <div className="chat-image avatar">
-                    <div className="w-10 h-10 rounded-full">
-                      <img
-                        alt="Bot avatar"
-                        src={assets.Robot}
-                        className="rounded-full"
-                      />
-                    </div>
-                  </div>
-                )}
-                <div
-                  className={`md:px-10 md:py-2 px-8 py-1 max-w-xs ${
-                    msg.sender === "user"
-                      ? "bg-blue-500 text-white rounded-tl-[13px] rounded-tr-[13px] rounded-bl-[13px] rounded-br-[3px]"
-                      : "bg-black text-white rounded-tl-[13px] rounded-tr-[13px] rounded-bl-[3px] rounded-br-[13px]"
-                  }`}
-                >
-                  {msg.text}
-                </div>
-                {msg.sender === "user" && (
-                  <div className="chat-image avatar">
-                    <div className="w-10 h-10 rounded-full">
-                      <img
-                        alt="User avatar"
-                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                        className="rounded-full"
-                      />
-                    </div>
-                  </div>
-                )}
-              </div>
-            ))}
-          </DialogBody>
+          {chatHistory.map((chat, index) => (
+            <ChatMessage key={index} chat={chat} />
+          ))}
+        </DialogBody>
 
-          {/* Dialog Footer */}
-          <DialogFooter className="px-4 py-2 flex items-center space-x-2">
-            <div className="relative flex-1">
-              <input
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask me anything..."
-                className="w-full px-4 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-1 focus:ring-gray-400 text-gray-500 pr-10"
-              />
-              <button
-                onClick={sendMessage}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-blue-400 text-white flex items-center justify-center rounded-full hover:bg-gray-800"
-              >
-                <FaArrowUp className="w-4 h-4" />
-              </button>
-            </div>
-          </DialogFooter>
-        </div>
+        <DialogFooter className="p-4 bg-gray-100">
+          <form
+            className="flex items-center bg-white rounded-full shadow-md focus-within:ring focus-within:ring-[#0099ff]"
+            onSubmit={handleFormSubmit}
+          >
+            <input
+              ref={inputRef}
+              type="text"
+              placeholder="Message..."
+              className="flex-1 bg-transparent px-4 py-2 text-gray-700 outline-none"
+              required
+            />
+            <button
+              type="submit"
+              className="w-10 h-10 flex items-center justify-center bg-[#0099ff] text-white rounded-full hover:bg-purple-600 transition"
+            >
+              <IoIosArrowUp size={20} />
+            </button>
+          </form>
+        </DialogFooter>
       </Dialog>
     </div>
   );
