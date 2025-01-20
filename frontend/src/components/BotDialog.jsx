@@ -3,10 +3,16 @@ import { assets } from "../assets/assets";
 import { Dialog, DialogHeader, DialogBody, DialogFooter } from "@material-tailwind/react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { Button } from "@material-tailwind/react";
-
+import CompanyInfo from './CompanyInfo'
 function BotDialog() {
   const [open, setOpen] = useState(false);
-  const [chatHistory, setChatHistory] = useState([]);
+  const [chatHistory, setChatHistory] = useState([
+    {
+    hideInChat:true,
+    role:"model",
+    text:CompanyInfo,
+  },
+]);
   const chatBodyRef = useRef();
   const inputRef = useRef();
   const userProfile = "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"; // Add the user profile image URL here
@@ -62,41 +68,50 @@ function BotDialog() {
       { role: "user", text: userMessage },
     ]);
 
-    setTimeout(() => {
+    setTimeout(() => 
       setChatHistory((history) => [
         ...history,
-        { role: "model", text: "Thinking..." },
-      ]);
+        { role: "model", text: "Thinking..." }
+      ]),600)
 
-      generateBotResponse([...chatHistory, { role: "user", text: userMessage }]);
-    }, 600);
+      generateBotResponse([...chatHistory, { role: "user", text:  `Using the details provided above, please this query:${userMessage}`}]);
+    
   };
 
   const ChatMessage = ({ chat }) => (
     <div
-      className={`flex items-center gap-2 pt-4 ${
+      className={`flex items-center gap-1 pt-1 ${
         chat.role === "model" ? "flex-row" : "flex-row-reverse"
       }`}
     >
-      {chat.role === "model" && (
-        <div className="w-10 h-10 flex items-center justify-center bg-[#0099ff] rounded-full">
-          <img src={assets.Robot} alt="Robot Icon" className="w-10 h-10" />
-        </div>
-      )}
+      
+      {!chat.hideInChat && (
+  <div className={`flex items-center gap-1 pt-2 ${chat.role === "model" ? "flex-row" : "flex-row-reverse"}`}>
+    {chat.role === "model" && (
+      <div className="w-10 h-10 flex items-center justify-center bg-[#0099ff] rounded-full">
+        <img src={assets.Robot} alt="Robot Icon" className="w-10 h-10" />
+      </div>
+    )}
       {chat.role === "user" && (
-        <div className="w-10 h-10 flex items-center justify-center">
-          <img src={userProfile} alt="User Avatar" className="w-10 h-10 rounded-full" />
-        </div>
-      )}
-      <p
-        className={`md:p-4 p-2 px-8 md:px-12 rounded-lg max-w-[75%] break-words ${
-          chat.role === "model"
-            ? "bg-gray-100 text-gray-800 rounded-bl-none"
-            : "bg-[#0099ff] text-white rounded-br-none"
-        }`}
-      >
-        {chat.text}
-      </p>
+      <div className="w-10 h-10 flex items-center justify-center">
+        <img src={userProfile} alt="User Avatar" className="w-10 h-10 rounded-full" />
+      </div>
+    )}
+    
+    <p
+      className={`md:p-4 p-2 px-12 md:px-12  rounded-lg max-w-[75%] break-words ${
+        chat.role === "model"
+          ? "bg-gray-100 text-gray-800 rounded-bl-none "
+          : "bg-[#0099ff] text-white rounded-br-none "
+      }`}
+    >
+      {chat.text}
+    </p>
+
+  
+  </div>
+)}
+
     </div>
   );
 
