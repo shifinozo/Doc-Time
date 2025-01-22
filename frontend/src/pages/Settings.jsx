@@ -1,20 +1,28 @@
 import React from "react";
-import { FaArrowLeft } from "react-icons/fa";
-import { List, ListItem, ListItemPrefix } from "@material-tailwind/react";
+import {
+  List,
+  ListItem,
+  ListItemPrefix,
+  Switch,
+} from "@material-tailwind/react";
+import { useState } from "react";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { MdOutlineLightMode } from "react-icons/md";
-import { FaRegStar } from "react-icons/fa";
+import { FaRegStar, FaArrowLeft } from "react-icons/fa";
 import { MdOutlineShare } from "react-icons/md";
-import { CiLock } from "react-icons/ci";
 import { FaRegFile } from "react-icons/fa";
 import { MdOutlineEmail } from "react-icons/md";
 import { MdOutlineFeedback } from "react-icons/md";
 import { MdLogout } from "react-icons/md";
+import { MdOutlineLock } from "react-icons/md";
+import { MdSunny } from "react-icons/md";
 function Settings() {
+  const [isLightMode, setIsLightMode] = useState(false);
+  const toggleLightMode = () => setIsLightMode((prev) => !prev);
   return (
-    <div className="p-4">
+    <div className="p-4 h-min-screen">
       {/* Header */}
-      <div className="flex items-center gap-10 mb-6">
+      <div className="flex items-center gap-5 mb-6">
         <button aria-label="Go back" className="text-xl">
           <FaArrowLeft />
         </button>
@@ -24,57 +32,72 @@ function Settings() {
       {/* Material Tailwind List */}
       <div className="bg-white rounded-lg shadow-md p-4">
         <List>
-          <ListItem>
-            <ListItemPrefix>
-              <IoMdNotificationsOutline className="text-blue-500 text-2xl" />
-            </ListItemPrefix>
-            Notifications
+          <ListItem className="flex justify-between items-center">
+            <div className="flex items-center">
+              <ListItemPrefix>
+                <IoMdNotificationsOutline className="text-2xl" />
+              </ListItemPrefix>
+              Notifications
+            </div>
+            <Switch color="light-blue" />
           </ListItem>
-          <ListItem>
-            <ListItemPrefix>
-              <MdOutlineLightMode className="text-green-500 text-2xl" />
-            </ListItemPrefix>
-            Theme
+          <ListItem className="flex justify-between items-center">
+            <div className="flex items-center">
+              <ListItemPrefix>
+                {isLightMode ? (
+                  <MdSunny className="text-2xl" />
+                ) : (
+                  <MdOutlineLightMode className="text-2xl" />
+                )}
+              </ListItemPrefix>
+              {isLightMode ? "Dark Mode" : "Light Mode"}
+            </div>
+            <Switch
+              color="light-blue"
+              checked={isLightMode}
+              onChange={toggleLightMode}
+            />
           </ListItem>
+
           <ListItem>
             <ListItemPrefix>
-              <FaRegStar className="text-red-500 text-2xl" />
+              <FaRegStar className=" text-2xl" />
             </ListItemPrefix>
             Rate Us
           </ListItem>
           <ListItem>
             <ListItemPrefix>
-              <MdOutlineShare className="text-red-500 text-2xl" />
+              <MdOutlineShare className=" text-2xl" />
             </ListItemPrefix>
             Share App
           </ListItem>
           <ListItem>
             <ListItemPrefix>
-              <CiLock className="text-red-500 text-2xl" />
+              <MdOutlineLock className=" text-2xl" />
             </ListItemPrefix>
             Privacy Policy
           </ListItem>
           <ListItem>
             <ListItemPrefix>
-              < FaRegFile className="text-red-500 text-2xl" />
+              <FaRegFile className=" text-2xl" />
             </ListItemPrefix>
             Terms and Conditions
           </ListItem>
           <ListItem>
             <ListItemPrefix>
-              <MdOutlineEmail className="text-red-500 text-2xl" />
+              <MdOutlineEmail className=" text-2xl" />
             </ListItemPrefix>
             Contact Us
           </ListItem>
           <ListItem>
             <ListItemPrefix>
-              <MdOutlineFeedback className="text-red-500 text-2xl" />
+              <MdOutlineFeedback className=" text-2xl" />
             </ListItemPrefix>
             Feedback
           </ListItem>
           <ListItem>
             <ListItemPrefix>
-              <MdLogout className="text-red-500 text-2xl" />
+              <MdLogout className=" text-2xl" />
             </ListItemPrefix>
             Logout
           </ListItem>
