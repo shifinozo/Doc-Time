@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useMemo } from "react";
 import { AppContext } from "../context/AppContext";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -13,19 +13,15 @@ import {
   DialogHeader,
   DialogBody,
   DialogFooter,
-} from "@material-tailwind/react";
-import User from "../../public/images/user1.png";
-import Calendar from "../../public/images/calendar.png";
-import Padlock from "../../public/images/padlock.png";
-import Translate from "../../public/images/translate.png";
-import Right from "../../public/images/right.png";
-import Settings from '../../public/images/settingss.png';
-import {
   List,
   ListItem,
   ListItemPrefix,
   ListItemSuffix,
 } from "@material-tailwind/react";
+import User from "../../public/images/user1.png";
+import Calendar from "../../public/images/calendar.png";
+import Right from "../../public/images/right.png";
+import Settings from "../../public/images/settingss.png";
 
 // Reusable Input Component
 const FieldInput = ({ label, value, onChange, type = "text", isEdit }) => (
@@ -54,6 +50,15 @@ const MyProfile = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const { token, backendUrl, userData, setUserData, loadUserProfileData } =
     useContext(AppContext);
+
+  // Memoize avatar URL to avoid unnecessary re-computation
+  const avatarUrl = useMemo(
+    () =>
+      image
+        ? URL.createObjectURL(image)
+        : userData?.image || "/default-avatar.png",
+    [image, userData?.image]
+  );
 
   // Handle input changes
   const handleInputChange = (field, value) => {
@@ -105,103 +110,42 @@ const MyProfile = () => {
   const buttons = [
     {
       label: "My Profile",
-      icon: (
-        <img
-          src={User}
-          alt="User Icon"
-          className="h-10 w-10 bg-[#eaf2ff] p-2 rounded-full border border-[#eaf2ff]"
-        />
-      ),
+      icon: <IconWrapper src={User} />,
       onClick: () => setDialogOpen(true),
     },
     {
       label: "Appointment History",
-      icon: (
-        <img
-          src={Calendar}
-          alt="User Icon"
-          className="h-10 w-10 bg-[#eaf2ff] p-2 rounded-full border border-[#eaf2ff]"
-        />
-      ),
+      icon: <IconWrapper src={Calendar} />,
       onClick: () => navigate("/my-appointments"),
     },
-
-    {
-      label: "Change Password",
-      icon: (
-        <img
-          src={Padlock}
-          alt="User Icon"
-          className="h-10 w-10 bg-[#eaf2ff] p-2 rounded-full border border-[#eaf2ff]"
-        />
-      ),
-      onClick: () => console.log("Change Password clicked"),
-    },
-    {
-      label: "Change Language",
-      icon: (
-        <img
-          src={Translate}
-          alt="User Icon"
-          className="h-10 w-10 bg-[#eaf2ff] p-2 rounded-full border border-[#eaf2ff]"
-        />
-      ),
-      onClick: () => console.log("Change Language clicked"),
-    },
+    
     {
       label: "Settings",
-      icon: (
-        <img
-          src={Settings}
-          alt="User Icon"
-          className="h-10 w-10 bg-[#eaf2ff] p-2 rounded-full border border-[#eaf2ff]"
-        />
-      ),
-      onClick: () => navigate("/Settings"),
-     
+      icon: <IconWrapper src={Settings} />,
+      onClick: () => navigate("/settings"),
     },
   ];
 
   return userData ? (
-    <div className="flex flex-col fixed items-center w-full   text-white min-h-screen  overflow-auto ">
-      <div className="flex flex-col items-start pt-4">
-        {/* Profile Header */}
-        
-
-        {/* Profile Image and Details */}
-        <div className="flex items-center space-x-10 pt-10">
-          {/* Profile Image */}
-          <Avatar
-            className="w-20 h-20 rounded-full"
-            src={
-              image
-                ? URL.createObjectURL(image)
-                : userData.image || "/default-avatar.png"
-            }
-          />
-
-          {/* Profile Details */}
-          <div>
-            <div className="text-black font-bold text-2xl">
-              <FieldInput value={userData.name} className="" />
-            </div>
-            <p className="text-gray-500 font-semibold text-lg">
-              {userData.email}
-            </p>
-          </div>
+    <div className="flex flex-col items-center w-full text-white min-h-screen overflow-auto">
+      {/* Profile Header */}
+      <div className="flex items-center space-x-10 pt-10">
+        <Avatar className="w-20 h-20 rounded-full" src={avatarUrl} />
+        <div>
+          <h2 className="text-black font-bold text-2xl">{userData.name}</h2>
+          <p className="text-gray-500 font-semibold text-lg">{userData.email}</p>
         </div>
       </div>
 
       {/* Action Buttons */}
-
-      <div className="flex flex-col items-start gap-4 mt-10 pt-4 md:pl-20 pl-6 w-full min-h-screen overflow-auto rounded-t-2xl bg-white">
-        <h1 className="text-black max-w-prose font-bold">Account Overview</h1>
-        <List className="w-full md:w-[90%] bg-transparent">
+      <div className="flex flex-col gap-4 mt-10 w-full bg-white rounded-t-2xl">
+        <h1 className="text-black font-bold text-lg px-6">Account Overview</h1>
+        <List className="w-full px-6">
           {buttons.map((button, index) => (
             <ListItem
               key={index}
               onClick={button.onClick}
-              className="h-14 flex items-center justify-between px-6 hover:bg-gray-100 cursor-pointer"
+              className="h-14 flex items-center justify-between hover:bg-gray-100 cursor-pointer"
             >
               <ListItemPrefix>
                 <div className="flex items-center gap-4">
@@ -216,86 +160,83 @@ const MyProfile = () => {
           ))}
         </List>
       </div>
-      {/* Dialog for My Profile */}
-      <Dialog open={dialogOpen} handler={setDialogOpen} size="sm" className="max-h-[90vh]">
-  <DialogHeader>User Profile Details</DialogHeader>
-  <DialogBody divider className="max-h-[60vh] overflow-y-auto">
-    <Avatar
-      className="w-20 h-20 rounded-full mx-auto"
-      src={image ? URL.createObjectURL(image) : userData.image || "/default-avatar.png"}
-    />
-    {isEdit && (
-      <Input type="file" accept="image/*" className="mt-2" onChange={handleImageUpload} />
-    )}
-    <div className="flex flex-col gap-1">
-    <FieldInput
-        label="Phone"
-        value={userData.name}
-        onChange={(e) => handleInputChange("name", e.target.value)}
-        isEdit={isEdit}
-      />
-      <FieldInput
-        label="Phone"
-        value={userData.phone}
-        onChange={(e) => handleInputChange("phone", e.target.value)}
-        isEdit={isEdit}
-      />
-      <FieldInput
-        label="Gender"
-        value={userData.gender}
-        onChange={(value) => handleInputChange("gender", value)}
-        type="select"
-        isEdit={isEdit}
-      />
-      <FieldInput
-        label="Address"
-        value={userData.address?.street}
-        onChange={(e) => handleInputChange("address.street", e.target.value)}
-        isEdit={isEdit}
-      />
-      <FieldInput
-        label="Date of Birth"
-        value={userData.dob}
-        onChange={(e) => handleInputChange("dob", e.target.value)}
-        type="date"
-        isEdit={isEdit}
-      />
-    </div>
-  </DialogBody>
-  <DialogFooter className="flex justify-between gap-2">
-  <Button
-    variant="gradient"
-    color="blue"
-    className="flex-1"
-    onClick={isEdit ? updateUserProfileData : () => setIsEdit(true)}
-  >
-    {isEdit ? "Save" : "Edit"}
-  </Button>
-  {isEdit && (
-    <Button
-      variant="gradient"
-      color="red"
-      className="flex-1"
-      onClick={() => setIsEdit(false)}
-    >
-      Cancel
-    </Button>
-  )}
-  <Button
-    variant="gradient"
-    color="gray"
-    className={`flex-1 ${!isEdit ? "ml-2" : ""}`}
-    onClick={() => setDialogOpen(false)}
-  >
-    Close
-  </Button>
-</DialogFooter>
 
-
-</Dialog>
+      {/* Profile Dialog */}
+      <Dialog
+        open={dialogOpen}
+        handler={setDialogOpen}
+        size="sm"
+        className="max-h-[90vh]"
+      >
+        <DialogHeader>User Profile Details</DialogHeader>
+        <DialogBody divider className="max-h-[60vh] overflow-y-auto">
+          <Avatar className="w-20 h-20 mx-auto" src={avatarUrl} />
+          {isEdit && (
+            <Input type="file" accept="image/*" onChange={handleImageUpload} />
+          )}
+          <div className="flex flex-col gap-2 mt-4">
+            <FieldInput
+              label="Name"
+              value={userData.name}
+              onChange={(e) => handleInputChange("name", e.target.value)}
+              isEdit={isEdit}
+            />
+            <FieldInput
+              label="Phone"
+              value={userData.phone}
+              onChange={(e) => handleInputChange("phone", e.target.value)}
+              isEdit={isEdit}
+            />
+            <FieldInput
+              label="Gender"
+              value={userData.gender}
+              onChange={(value) => handleInputChange("gender", value)}
+              type="select"
+              isEdit={isEdit}
+            />
+            <FieldInput
+              label="Address"
+              value={userData.address?.street}
+              onChange={(e) => handleInputChange("address.street", e.target.value)}
+              isEdit={isEdit}
+            />
+            <FieldInput
+              label="Date of Birth"
+              value={userData.dob}
+              onChange={(e) => handleInputChange("dob", e.target.value)}
+              type="date"
+              isEdit={isEdit}
+            />
+          </div>
+        </DialogBody>
+        <DialogFooter className="flex justify-between">
+          <Button
+            variant="gradient"
+            color="blue"
+            onClick={isEdit ? updateUserProfileData : () => setIsEdit(true)}
+          >
+            {isEdit ? "Save" : "Edit"}
+          </Button>
+          {isEdit && (
+            <Button variant="gradient" color="red" onClick={() => setIsEdit(false)}>
+              Cancel
+            </Button>
+          )}
+          <Button variant="gradient" color="gray" onClick={() => setDialogOpen(false)}>
+            Close
+          </Button>
+        </DialogFooter>
+      </Dialog>
     </div>
-    
   ) : null;
 };
+
+const IconWrapper = ({ src }) => (
+  <img
+    src={src}
+    alt="Icon"
+    className="h-10 w-10 bg-[#eaf2ff] p-2 rounded-full border border-[#eaf2ff]"
+  />
+);
 
 export default MyProfile;

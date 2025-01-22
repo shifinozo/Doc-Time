@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { MdFilterList } from "react-icons/md";
-import {FaSearch } from "react-icons/fa";
 import { AppContext } from "../context/AppContext";
 import { Button, Dialog, DialogHeader, DialogBody, DialogFooter } from "@material-tailwind/react";
 

@@ -1,54 +1,72 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   List,
   ListItem,
   ListItemPrefix,
   Switch,
 } from "@material-tailwind/react";
-import { useState } from "react";
 import { IoMdNotificationsOutline } from "react-icons/io";
-import { MdOutlineLightMode } from "react-icons/md";
-import { FaRegStar, FaArrowLeft } from "react-icons/fa";
-import { MdOutlineShare } from "react-icons/md";
-import { FaRegFile } from "react-icons/fa";
-import { MdOutlineEmail } from "react-icons/md";
-import { MdOutlineFeedback } from "react-icons/md";
+import {
+  MdOutlineLightMode,
+  MdSunny,
+  MdOutlineShare,
+  MdOutlineEmail,
+  MdOutlineFeedback,
+  MdOutlineLock,
+} from "react-icons/md";
+import { Link } from "react-router-dom";
+import { FaRegStar, FaArrowLeft, FaRegFile } from "react-icons/fa";
 import { MdLogout } from "react-icons/md";
-import { MdOutlineLock } from "react-icons/md";
-import { MdSunny } from "react-icons/md";
+
 function Settings() {
   const [isLightMode, setIsLightMode] = useState(false);
   const toggleLightMode = () => setIsLightMode((prev) => !prev);
+
+  const IconWrapper = ({ children }) => (
+    <div className="bg-[#eaf2ff] p-2 rounded-full text-black flex items-center justify-center">
+      {children}
+    </div>
+  );
+
   return (
-    <div className="p-4 h-min-screen">
+    <div className="p-4 h-min-screen ">
       {/* Header */}
       <div className="flex items-center gap-5 mb-6">
-        <button aria-label="Go back" className="text-xl">
-          <FaArrowLeft />
-        </button>
+        <Link to="/my-profile">
+          <button aria-label="Go back" className="text-xl">
+            <FaArrowLeft />
+          </button>
+        </Link>
         <h1 className="text-2xl font-bold">Settings</h1>
       </div>
 
       {/* Material Tailwind List */}
-      <div className="bg-white rounded-lg shadow-md p-4">
+      <div className="flex justify-center">
+
+      <div className="bg-white rounded-lg shadow-md p-4 md:w-[50%] w-full">
         <List>
           <ListItem className="flex justify-between items-center">
-            <div className="flex items-center">
+            <div className="flex items-center font-bold">
               <ListItemPrefix>
-                <IoMdNotificationsOutline className="text-2xl" />
+                <IconWrapper>
+                  <IoMdNotificationsOutline className="text-2xl" />
+                </IconWrapper>
               </ListItemPrefix>
               Notifications
             </div>
             <Switch color="light-blue" />
           </ListItem>
+
           <ListItem className="flex justify-between items-center">
-            <div className="flex items-center">
+            <div className="flex items-center font-bold">
               <ListItemPrefix>
-                {isLightMode ? (
-                  <MdSunny className="text-2xl" />
-                ) : (
-                  <MdOutlineLightMode className="text-2xl" />
-                )}
+                <IconWrapper>
+                  {isLightMode ? (
+                    <MdSunny className="text-2xl" />
+                  ) : (
+                    <MdOutlineLightMode className="text-2xl" />
+                  )}
+                </IconWrapper>
               </ListItemPrefix>
               {isLightMode ? "Dark Mode" : "Light Mode"}
             </div>
@@ -59,50 +77,72 @@ function Settings() {
             />
           </ListItem>
 
-          <ListItem>
+          <ListItem className="font-bold">
             <ListItemPrefix>
-              <FaRegStar className=" text-2xl" />
+              <IconWrapper>
+                <FaRegStar className="text-2xl" />
+              </IconWrapper>
             </ListItemPrefix>
             Rate Us
           </ListItem>
-          <ListItem>
+
+          <ListItem className="font-bold">
             <ListItemPrefix>
-              <MdOutlineShare className=" text-2xl" />
+              <IconWrapper>
+                <MdOutlineShare className="text-2xl" />
+              </IconWrapper>
             </ListItemPrefix>
             Share App
           </ListItem>
-          <ListItem>
+
+          <ListItem className="font-bold">
             <ListItemPrefix>
-              <MdOutlineLock className=" text-2xl" />
+              <IconWrapper>
+                <MdOutlineLock className="text-2xl" />
+              </IconWrapper>
             </ListItemPrefix>
             Privacy Policy
           </ListItem>
-          <ListItem>
+
+          <ListItem className="font-bold">
             <ListItemPrefix>
-              <FaRegFile className=" text-2xl" />
+              <IconWrapper>
+                <FaRegFile className="text-2xl" />
+              </IconWrapper>
             </ListItemPrefix>
             Terms and Conditions
           </ListItem>
-          <ListItem>
+
+          <ListItem className="font-bold">
             <ListItemPrefix>
-              <MdOutlineEmail className=" text-2xl" />
+              <IconWrapper>
+                <MdOutlineEmail className="text-2xl" />
+              </IconWrapper>
             </ListItemPrefix>
             Contact Us
           </ListItem>
-          <ListItem>
+
+          <ListItem className="font-bold">
             <ListItemPrefix>
-              <MdOutlineFeedback className=" text-2xl" />
+              <IconWrapper>
+                <MdOutlineFeedback className="text-2xl" />
+              </IconWrapper>
             </ListItemPrefix>
             Feedback
           </ListItem>
-          <ListItem>
+
+          <ListItem className="font-bold">
             <ListItemPrefix>
-              <MdLogout className=" text-2xl" />
+              <IconWrapper>
+                <MdLogout className="text-2xl" />
+              </IconWrapper>
             </ListItemPrefix>
             Logout
           </ListItem>
         </List>
       </div>
+      </div>
+
     </div>
   );
 }
