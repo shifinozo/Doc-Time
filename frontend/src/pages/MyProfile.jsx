@@ -157,6 +157,7 @@ const MyProfile = () => {
           className="h-10 w-10 bg-[#eaf2ff] p-2 rounded-full border border-[#eaf2ff]"
         />
       ),
+      onClick: () => navigate("/Settings"),
      
     },
   ];
