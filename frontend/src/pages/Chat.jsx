@@ -1,10 +1,11 @@
 import React from 'react'
-import BotDialog from '../components/BotDialog'
+import DoctorsChat from '../components/DoctorsChat'
+
 
 function Chat() {
   return (
-    <div className='flex justify-center items-center min-h-screen '>
-      <BotDialog />
+    <div className=''>
+    <DoctorsChat />
     </div>
   )
 }
