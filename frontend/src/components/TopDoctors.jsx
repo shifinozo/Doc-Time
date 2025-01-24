@@ -38,7 +38,7 @@ const TopDoctors = () => {
               navigate(`/appointment/${item._id}`);
               scrollTo(0, 0);
             }}
-            className="flex items-center bg-[#EAEFFF] border border-[#C9D8FF] rounded-xl p-4 cursor-pointer hover:shadow-md transition-all duration-300"
+            className="flex items-center hover:bg-gray-100 border border-[#C9D8FF] rounded-xl p-4 cursor-pointer hover:shadow-md transition-all duration-300"
             key={index}
           >
             {/* Doctor Image */}

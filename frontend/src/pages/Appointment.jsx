@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams,Link } from 'react-router-dom';
 import { AppContext } from '../context/AppContext';
 import { assets } from '../assets/assets';
 import { Button, Dialog, DialogHeader, DialogBody, DialogFooter } from '@material-tailwind/react';
@@ -7,7 +7,7 @@ import { PiChatCenteredTextFill } from 'react-icons/pi';
 import { IoMdClose } from 'react-icons/io';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import RelatedDoctors from '../components/RelatedDoctors';
+
 
 const Appointment = () => {
   const { docId } = useParams();
@@ -149,7 +149,9 @@ const Appointment = () => {
               Make Appointment
             </Button>
             <div className="w-10 h-10 border border-x-2 border-y-2 border-gray-200 rounded-lg flex items-center justify-center">
-              <PiChatCenteredTextFill className="size-6" />
+             <Link to="/chat">
+             <PiChatCenteredTextFill className="size-6" />
+             </Link>
             </div>
           </div>
         </div>
