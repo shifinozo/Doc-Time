@@ -16,7 +16,7 @@ const Home = () => {
       <Footer />
       
       {/* Bot Dialog */}
-      <div className="fixed bottom-4 right-1 md:right-6">
+      <div className="fixed bottom-4 left-1 md:left-6">
         <BotDialog />
       </div>
     </div>

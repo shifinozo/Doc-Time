@@ -43,6 +43,7 @@ function Header() {
             <IoMdNotificationsOutline className="text-black text-2xl" />
             <span className="absolute -top-0 -right-0 w-3 h-3 text-white bg-red-600 rounded-full"></span>
           </div>
+          
 
           {/* Profile Section */}
           {token && userData ? (
