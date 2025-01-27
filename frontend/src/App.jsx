@@ -38,8 +38,8 @@ function App() {
             
           </Route>
         </Routes>
+      </div>  
       </div>
-    </div>
   );
 }
 

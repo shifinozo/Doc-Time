@@ -14,5 +14,31 @@ DocTime Main Purpose:
 Details:
 Doctime is a comprehensive, user-friendly web-based application designed to simplify the process of booking and managing doctor appointments. It bridges the gap between patients and healthcare providers by offering an intuitive platform for easy interaction and efficient scheduling.
 Location: Doctime is located in Kerala, Malappuram
+
+Doctors Details:
+- **Dr. Arjun Menon**
+  - Specialty: Cardiologist
+  - Experience: 10+ years
+  - Location: Malappuram, Kerala
+  - Contact: +91-9876543210
+
+- **Dr. Priya Nair**
+  - Specialty: Pediatrician
+  - Experience: 8+ years
+  - Location: Kozhikode, Kerala
+  - Contact: +91-9876543211
+
+- **Dr. Sameer Khan**
+  - Specialty: Dermatologist
+  - Experience: 12+ years
+  - Location: Thrissur, Kerala
+  - Contact: +91-9876543212
+
+- **Dr. Anjali Das**
+  - Specialty: Gynecologist
+  - Experience: 15+ years
+  - Location: Ernakulam, Kerala
+  - Contact: +91-9876543213
 `;
+
 export default CompanyInfo;
