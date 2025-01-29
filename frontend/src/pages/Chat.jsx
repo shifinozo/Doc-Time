@@ -1,5 +1,5 @@
 import React from 'react'
-import DoctorsChat from '../components/DoctorsChat'
+import DoctorsChat from '../components/Chat/DoctorsChat'
 
 
 function Chat() {

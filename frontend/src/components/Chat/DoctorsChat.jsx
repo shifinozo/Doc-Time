@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AppContext } from "../context/AppContext";
+import { AppContext } from "../../context/AppContext";
+import DoctorMessage from "./DoctorMessage";
 import {
   List,
   ListItem,
@@ -8,6 +9,7 @@ import {
   Typography,
   Avatar,
 } from "@material-tailwind/react";
+
 
 
 
@@ -103,6 +105,11 @@ const DoctorsChat = () => {
           ))}
         </List>
       </div>
+     
+      <div className="hidden md:block  h-screen w-[70%]">
+  <DoctorMessage  />
+</div>
+
     </div>
   );
 };
