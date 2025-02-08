@@ -8,7 +8,7 @@ import {
 } from "@material-tailwind/react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { Button, Avatar } from "@material-tailwind/react";
-import CompanyInfo from "./CompanyInfo";
+import CompanyInfo  from './CompanyInfo';
 import { AppContext } from "../context/AppContext";
 
 function BotDialog() {

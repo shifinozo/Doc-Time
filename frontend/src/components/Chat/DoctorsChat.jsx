@@ -1,7 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useContext} from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../context/AppContext";
-import DoctorMessage from "./DoctorMessage";
+
 import {
   List,
   ListItem,
@@ -18,10 +18,7 @@ const DoctorsChat = () => {
   const { doctors } = useContext(AppContext);
   
 
-  if (!doctors || doctors.length === 0) {
-    return <p className="text-center text-gray-500">No doctors available</p>;
-  }
-
+  
   const displayedDoctors = doctors;
 
   return (
@@ -43,7 +40,7 @@ const DoctorsChat = () => {
             <ListItem
               key={doctor._id}
               className="cursor-pointer hover:bg-gray-100 border-b border-gray-300"
-              onClick={() => navigate(`/appointment/${doctor._id}`)}
+              onClick={() => navigate(`/doctorMessage/${doctor._id}`)}
             >
               <ListItemPrefix>
                 <Avatar
@@ -105,10 +102,7 @@ const DoctorsChat = () => {
           ))}
         </List>
       </div>
-     
-      <div className="hidden md:block  h-screen w-[70%]">
-  <DoctorMessage  />
-</div>
+   
 
     </div>
   );

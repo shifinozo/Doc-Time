@@ -14,6 +14,7 @@ import GettingStarted from "./pages/GettingStarted";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Settings from "./pages/Settings";
+import DoctorMessage from "./components/Chat/DoctorMessage";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
             <Route path="doctors" element={<Doctors />} />
             <Route path="doctors/:speciality" element={<Doctors />} />
             <Route path="chat" element={<Chat />} />
+            <Route path="doctorMessage/:docId" element={<DoctorMessage/>} />
             <Route path="login" element={<Login />} />
             <Route path="about" element={<About />} />
             <Route path="contact" element={<Contact />} />         
