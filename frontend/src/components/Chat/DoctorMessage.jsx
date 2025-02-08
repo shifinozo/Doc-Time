@@ -1,6 +1,4 @@
-
-
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { IoCallOutline } from "react-icons/io5";
 import { Button, Input } from "@material-tailwind/react";
@@ -12,14 +10,16 @@ const DoctorMessage = () => {
   const [docInfo, setDocInfo] = useState(null);
   const { doctors, backendUrl, token } = useContext(AppContext);
 
-  // Fetch doctor information based on doctorId
-  const fetchDocInfo = () => {
+  // Fetch doctor information
+  useEffect(() => {
     const selectedDoc = doctors.find((doc) => doc._id === doctorId);
-    setDocInfo(selectedDoc);
-  };
+    setDocInfo(selectedDoc || null);
+  }, [doctors, doctorId]);
 
-  // Fetch appointment data example
-  const fetchAppointmentData = async () => {
+  // Fetch appointment data
+  const fetchAppointmentData = useCallback(async () => {
+    if (!doctorId) return;
+
     try {
       const response = await axios.post(
         `${backendUrl}/api/user/book-appointment`,
@@ -30,16 +30,15 @@ const DoctorMessage = () => {
     } catch (error) {
       console.error("Error fetching appointment data:", error);
     }
-  };
+  }, [backendUrl, doctorId, token]);
 
   useEffect(() => {
-    if (doctors.length > 0) fetchDocInfo();
     fetchAppointmentData();
-  }, [doctors, doctorId]);
+  }, [fetchAppointmentData]);
 
   if (!docInfo) {
     return (
-      <div className="flex items-center justify-center h-full">
+      <div className="flex items-center justify-center h-screen">
         <p className="text-gray-500">Loading doctor details...</p>
       </div>
     );
@@ -62,7 +61,7 @@ const DoctorMessage = () => {
 
       {/* Chat Section */}
       <div className="flex-1 p-4 overflow-y-auto bg-white">
-        {/* Messages Section Placeholder */}
+        <p className="text-center text-gray-500">No messages yet.</p>
       </div>
 
       {/* Input Section */}
