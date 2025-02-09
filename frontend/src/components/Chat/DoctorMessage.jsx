@@ -4,6 +4,7 @@ import { IoCallOutline } from "react-icons/io5";
 import { Button, Input } from "@material-tailwind/react";
 import { AppContext } from "../../context/AppContext";
 import axios from "axios";
+import DocTimePro from "../DocTimePro";
 
 const DoctorMessage = () => {
   const { doctorId } = useParams();
@@ -39,7 +40,7 @@ const DoctorMessage = () => {
   if (!docInfo) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <p className="text-gray-500">Loading doctor details...</p>
+        <DocTimePro />
       </div>
     );
   }

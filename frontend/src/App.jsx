@@ -15,6 +15,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Settings from "./pages/Settings";
 import DoctorMessage from "./components/Chat/DoctorMessage";
+import DocTimePro from "./components/DocTimePro";
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
             <Route path="my-appointments" element={<MyAppointments />} />
             <Route path="appointment/:docId" element={<Appointment />} />
             <Route path="settings" element={<Settings />} />
+            <Route path="subcription" element={<DocTimePro />} />
             
           </Route>
         </Routes>
