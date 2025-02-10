@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate  } from "react-router-dom";
 import Layout from "./layout/Layout";
 import Home from "./pages/Home";
 import Doctors from "./pages/Doctors";
@@ -16,7 +16,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Settings from "./pages/Settings";
 import DoctorMessage from "./components/Chat/DoctorMessage";
 import DocTimePro from "./components/DocTimePro";
-
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -38,7 +38,9 @@ function App() {
             <Route path="my-appointments" element={<MyAppointments />} />
             <Route path="appointment/:docId" element={<Appointment />} />
             <Route path="settings" element={<Settings />} />
-            <Route path="subcription" element={<DocTimePro />} />
+            <Route path="subscription" element={<DocTimePro />} />
+            <Route path="/404" element={<NotFound />} />
+            <Route path="*" element={<Navigate to="/404" replace />} />
             
           </Route>
         </Routes>

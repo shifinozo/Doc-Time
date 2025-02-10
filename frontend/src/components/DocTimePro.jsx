@@ -28,7 +28,7 @@ import {
   }
 function DocTimePro() {
   return (
-    <div className='flex justify-center items-center h-min-screen w-full pt-5 overflow-hidden'>
+    <div className='flex justify-center items-center min-h-screen w-full pt-10 overflow-hidden'>
        <Card color="blue" variant="gradient" className="w-full max-w-[22rem] p-8">
       <CardHeader
         floated={false}
@@ -58,31 +58,31 @@ function DocTimePro() {
             <span className="rounded-full border border-white/20 bg-white/20 p-1">
               <CheckIcon />
             </span>
-            <Typography className="font-normal text-sm">Secure Real-Time Doctor Chat</Typography>
+            <Typography className="font-semibold text-sm">Secure Real-Time Doctor Chat</Typography>
           </li>
           <li className="flex items-center gap-4">
             <span className="rounded-full border border-white/20 bg-white/20 p-1">
               <CheckIcon />
             </span>
-            <Typography className="font-normal text-sm">Unlimited bookings</Typography>
+            <Typography className="font-semibold text-sm">Unlimited bookings</Typography>
           </li>
           <li className="flex items-center gap-4">
             <span className="rounded-full border border-white/20 bg-white/20 p-1">
               <CheckIcon />
             </span>
-            <Typography className="font-normal text-sm">Priority appointment scheduling</Typography>
+            <Typography className="font-semibold text-sm">Priority appointment scheduling</Typography>
           </li>
           <li className="flex items-center gap-4">
             <span className="rounded-full border border-white/20 bg-white/20 p-1">
               <CheckIcon />
             </span>
-            <Typography className="font-normal text-sm">Health reports management</Typography>
+            <Typography className="font-semibold text-sm">Health reports management</Typography>
           </li>
           <li className="flex items-center gap-4">
             <span className="rounded-full border border-white/20 bg-white/20 p-1">
               <CheckIcon />
             </span>
-            <Typography className="font-normal text-sm">
+            <Typography className="font-semibold text-sm">
             Video consultations
             </Typography>
           </li>
@@ -90,7 +90,7 @@ function DocTimePro() {
             <span className="rounded-full border border-white/20 bg-white/20 p-1">
               <CheckIcon />
             </span>
-            <Typography className="font-normal text-sm">
+            <Typography className="font-semibold text-sm">
             Exclusive access to top specialists
             </Typography>
           </li>
