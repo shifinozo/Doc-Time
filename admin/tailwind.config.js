@@ -10,7 +10,7 @@ module.exports = withMT({
   theme: {
     extend: {
       colors: {
-        'primary':"#5f6fff"
+        'primary':"#0099ff"
 
       },
       gridTemplateColumns:{
