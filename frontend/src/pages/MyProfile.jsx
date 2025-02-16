@@ -22,6 +22,7 @@ import User from "../../public/images/user1.png";
 import Calendar from "../../public/images/calendar.png";
 import Right from "../../public/images/right.png";
 import Settings from "../../public/images/settingss.png";
+import Login from '../pages/Login'
 
 // Reusable Input Component
 const FieldInput = ({ label, value, onChange, type = "text", isEdit }) => (
@@ -48,8 +49,9 @@ const MyProfile = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [image, setImage] = useState(null);
   const [dialogOpen, setDialogOpen] = useState(false);
-  const { token, backendUrl, userData, setUserData, loadUserProfileData } =
+  const { token, backendUrl, userData, setUserData, loadUserProfileData, setToken  } =
     useContext(AppContext);
+    
 
   // Memoize avatar URL to avoid unnecessary re-computation
   const avatarUrl = useMemo(
@@ -126,6 +128,7 @@ const MyProfile = () => {
     },
   ];
 
+ 
   return userData ? (
     <div className="flex flex-col items-center w-full text-white min-h-screen overflow-auto">
       {/* Profile Header */}
@@ -228,7 +231,8 @@ const MyProfile = () => {
         </DialogFooter>
       </Dialog>
     </div>
-  ) : null;
+  ) :  
+  <Login />
 };
 
 const IconWrapper = ({ src }) => (

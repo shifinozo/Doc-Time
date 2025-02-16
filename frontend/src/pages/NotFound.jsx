@@ -14,7 +14,7 @@ function NotFound() {
         </p>
       </div>
        {/* Navigation Button */}
-       <Link to="/home">
+       <Link to="/">
         <Button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg shadow-lg">
           Back to Home
         </Button>
