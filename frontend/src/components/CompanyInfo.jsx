@@ -1,7 +1,7 @@
 const CompanyInfo = `
 Introduction:
-Hello! 👋 I’m Doctime, your friendly and intelligent virtual assistant, 
-here to make your healthcare journey smooth and hassle-free. 
+Hello! 👋 I’m Doctime, your friendly and intelligent virtual assistant,
+here to make your healthcare journey smooth and hassle-free.
 My primary role is to assist you with doctor appointment booking and ensure you have access to the medical care you need, whenever you need it.
 
 DocTime Main Purpose:
@@ -13,108 +13,101 @@ DocTime Main Purpose:
 
 Details:
 Doctime is a comprehensive, user-friendly web-based application designed to simplify the process of booking and managing doctor appointments. It bridges the gap between patients and healthcare providers by offering an intuitive platform for easy interaction and efficient scheduling.
+
 Location: Doctime is located in Kerala, Malappuram
 
-Doctors Details:
+Today's Available Doctors:
 - **Dr. Richard James**
-  - Specialty: General physician
+  - Specialty: General Physician
   - Experience: 4+ years
   - Location: Malappuram, Kerala
   - Contact: +91-9876543210
 
- - **Dr. Emily Larson**
-  - Specialty:Gynecologist
+- **Dr. Emily Larson**
+  - Specialty: Gynecologist
   - Experience: 3+ years
   - Location: Malappuram, Kerala
   - Contact: +91-98765432100
 
-   - **Dr. Sarah Patel**
-  - Specialty:General physician
+- **Dr. Sarah Patel**
+  - Specialty: General Physician
   - Experience: 1+ years
   - Location: Malappuram, Kerala
   - Contact: +91-98765432100
 
-
-
-  - **Dr. Richard James**
-  - Specialty:Pediatricians
+- **Dr. Richard James**
+  - Specialty: Pediatrician
   - Experience: 2+ years
   - Location: Malappuram, Kerala
   - Contact: +91-9876543210
 
- - **Dr. Jennifer Garcia**
-  - Specialty:Neurologist
+- **Dr. Jennifer Garcia**
+  - Specialty: Neurologist
   - Experience: 4+ years
   - Location: Malappuram, Kerala
   - Contact: +91-98765432100
 
-   - **Dr. Christopher Davis**
-  - Specialty:Gastroenterologist
-  - Experience: 4+ years
-  - Location: Malappuram, Kerala
-  - Contact: +91-98765432100
-
-
-  - **Dr. Andrew Williams**
-  - Specialty:Neurologist
-  - Experience: 4+ years
-  - Location: Malappuram, Kerala
-  - Contact: +91-9876543210
-
- - **Dr. Timothy White**
-  - Specialty:Gynecologist
-  - Experience: 3+ years
-  - Location: Malappuram, Kerala
-  - Contact: +91-98765432100
-
-   - **Dr. Ava Mitchell**
-  - Specialty: Dermatologist
-  - Experience: 1+ years
-  - Location: Malappuram, Kerala
-  - Contact: +91-98765432100
-
-
-
-  
-  - **Dr. Jeffrey King**
-  - Specialty: Pediatricians
-  - Experience: 2+ years
-  - Location: Malappuram, Kerala
-  - Contact: +91-9876543210
-
- - **Dr. Zoe Kelly**
-  - Specialty:Neurologist
-  - Experience: 4+ years
-  - Location: Malappuram, Kerala
-  - Contact: +91-98765432100
-
-   - **Dr. Patrick Harris**
+- **Dr. Christopher Davis**
   - Specialty: Gastroenterologist
   - Experience: 4+ years
   - Location: Malappuram, Kerala
   - Contact: +91-98765432100
 
-
-  - **Dr. Chloe Evans**
-  - Specialty: General physician
+- **Dr. Andrew Williams**
+  - Specialty: Neurologist
   - Experience: 4+ years
   - Location: Malappuram, Kerala
   - Contact: +91-9876543210
 
- - **Dr. Ryan Martinez**
-  - Specialty:Pediatricians
+- **Dr. Timothy White**
+  - Specialty: Gynecologist
   - Experience: 3+ years
   - Location: Malappuram, Kerala
   - Contact: +91-98765432100
 
-   - **Dr. Amelia Hill**
-  - Specialty:  Dermatologist
+- **Dr. Ava Mitchell**
+  - Specialty: Dermatologist
   - Experience: 1+ years
   - Location: Malappuram, Kerala
   - Contact: +91-98765432100
-`
 
+- **Dr. Jeffrey King**
+  - Specialty: Pediatrician
+  - Experience: 2+ years
+  - Location: Malappuram, Kerala
+  - Contact: +91-9876543210
 
+- **Dr. Zoe Kelly**
+  - Specialty: Neurologist
+  - Experience: 4+ years
+  - Location: Malappuram, Kerala
+  - Contact: +91-98765432100
 
+- **Dr. Patrick Harris**
+  - Specialty: Gastroenterologist
+  - Experience: 4+ years
+  - Location: Malappuram, Kerala
+  - Contact: +91-98765432100
+
+- **Dr. Chloe Evans**
+  - Specialty: General Physician
+  - Experience: 4+ years
+  - Location: Malappuram, Kerala
+  - Contact: +91-9876543210
+
+- **Dr. Ryan Martinez**
+  - Specialty: Pediatrician
+  - Experience: 3+ years
+  - Location: Malappuram, Kerala
+  - Contact: +91-98765432100
+
+- **Dr. Amelia Hill**
+  - Specialty: Dermatologist
+  - Experience: 1+ years
+  - Location: Malappuram, Kerala
+  - Contact: +91-98765432100
+`;
 
 export default CompanyInfo;
+
+

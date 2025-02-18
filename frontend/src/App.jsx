@@ -18,7 +18,9 @@ import DoctorMessage from "./components/Chat/DoctorMessage";
 import DocTimePro from "./components/DocTimePro";
 import NotFound from "./pages/NotFound";
 
+
 function App() {
+  
   return (
     <div className="dark:bg-gray-900 bg-[#fff] ">
       <div className="">
@@ -26,7 +28,7 @@ function App() {
         <Routes>
           <Route path="/" element={<GettingStarted />} />
           <Route element={<Layout />} path="/">
-            <Route path="home" element={<Home />} />
+            <Route path="/home" element={ <Home /> } />
             <Route path="doctors" element={<Doctors />} />
             <Route path="doctors/:speciality" element={<Doctors />} />
             <Route path="chat" element={<Chat />} />
@@ -40,8 +42,7 @@ function App() {
             <Route path="settings" element={<Settings />} />
             <Route path="subscription" element={<DocTimePro />} />
             <Route path="/404" element={<NotFound />} />
-            <Route path="*" element={<Navigate to="/404" replace />} />
-            
+            <Route path="*" element={<Navigate to="/404" replace />} />           
           </Route>
         </Routes>
       </div>  
