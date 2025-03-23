@@ -1,7 +1,20 @@
 import React, { useState, useContext } from "react";
-import { List, ListItem, ListItemPrefix, Switch } from "@material-tailwind/react";
+import {
+  List,
+  ListItem,
+  ListItemPrefix,
+  Switch,
+} from "@material-tailwind/react";
 import { IoMdNotificationsOutline } from "react-icons/io";
-import { MdOutlineLightMode, MdSunny, MdOutlineShare, MdOutlineEmail, MdOutlineFeedback, MdOutlineLock } from "react-icons/md";
+import {
+  MdOutlineLightMode,
+  MdSunny,
+  MdOutlineShare,
+  MdOutlineEmail,
+  MdOutlineFeedback,
+  MdOutlineLock,
+} from "react-icons/md";
+import { MdOutlineLocationOn } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { FaRegStar, FaArrowLeft, FaRegFile } from "react-icons/fa";
 import { MdLogout } from "react-icons/md";
@@ -68,7 +81,11 @@ function Settings() {
                 </ListItemPrefix>
                 {isLightMode ? "Light Mode" : "Dark Mode"}
               </div>
-              <Switch color="light-blue" checked={isLightMode} onChange={toggleLightMode} />
+              <Switch
+                color="light-blue"
+                checked={isLightMode}
+                onChange={toggleLightMode}
+              />
             </ListItem>
 
             {[
@@ -76,8 +93,7 @@ function Settings() {
               { icon: <MdOutlineShare />, label: "Share App" },
               { icon: <MdOutlineLock />, label: "Privacy Policy" },
               { icon: <FaRegFile />, label: "Terms and Conditions" },
-              { icon: <MdOutlineEmail />, label: "Contact Us" },
-              { icon: <MdOutlineFeedback />, label: "Feedback" }
+              { icon: <MdOutlineFeedback />, label: "Feedback" },
             ].map((item, index) => (
               <ListItem key={index} className="font-bold cursor-pointer">
                 <ListItemPrefix>
@@ -86,6 +102,27 @@ function Settings() {
                 {item.label}
               </ListItem>
             ))}
+             <Link to="/contact">
+            <ListItem className="font-bold cursor-pointer">
+              <ListItemPrefix>
+                <IconWrapper>
+                  <MdOutlineEmail className="text-2xl" />
+                </IconWrapper>
+              </ListItemPrefix>
+              Contact
+            </ListItem>
+                  </Link>
+
+                  <Link to="/location">
+            <ListItem className="font-bold cursor-pointer">
+              <ListItemPrefix>
+                <IconWrapper>
+                  <MdOutlineLocationOn className="text-2xl" />
+                </IconWrapper>
+              </ListItemPrefix>
+              Location
+            </ListItem>
+                  </Link>
 
             <ListItem className="font-bold cursor-pointer" onClick={logout}>
               <ListItemPrefix>

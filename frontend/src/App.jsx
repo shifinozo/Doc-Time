@@ -17,7 +17,7 @@ import Settings from "./pages/Settings";
 import DoctorMessage from "./components/Chat/DoctorMessage";
 import DocTimePro from "./components/DocTimePro";
 import NotFound from "./pages/NotFound";
-
+import Location from "./pages/Location";
 
 function App() {
   
@@ -30,6 +30,7 @@ function App() {
           <Route element={<Layout />} path="/">
             <Route path="/home" element={ <Home /> } />
             <Route path="doctors" element={<Doctors />} />
+            <Route path="location" element={<Location />} />
             <Route path="doctors/:speciality" element={<Doctors />} />
             <Route path="chat" element={<Chat />} />
             <Route path="doctorMessage/:docId" element={<DoctorMessage/>} />

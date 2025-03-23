@@ -1,61 +1,73 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useMemo } from "react";
+import { AppContext } from "../context/AppContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { MdFilterList } from "react-icons/md";
-import { AppContext } from "../context/AppContext";
-import { Button, Dialog, DialogHeader, DialogBody, DialogFooter } from "@material-tailwind/react";
+import { Button, Dialog, DialogHeader, DialogBody, DialogFooter, Card, CardBody } from "@material-tailwind/react";
 
-function Doctors() {
+const Doctors = () => {
   const { speciality } = useParams();
   const { doctors } = useContext(AppContext);
-  const [filterDoc, setFilterDoc] = useState([]);
-  const [showFilter, setShowFilter] = useState(false);
   const navigate = useNavigate();
 
-  const applyFilter = () => {
-    if (speciality) {
-      setFilterDoc(doctors.filter((doc) => doc.speciality === speciality));
-    } else {
-      setFilterDoc(doctors);
-    }
-  };
+  const [showFilter, setShowFilter] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  useEffect(() => {
-    applyFilter();
-  }, [doctors, speciality]);
+  // Available Specialties
+  const specialities = [
+    "General Physician",
+    "Gynecologist",
+    "Dermatologist",
+    "Pediatrician",
+    "Neurologist",
+    "Gastroenterologist",
+  ];
+
+  // Memoized Doctor Filtering
+  const filteredDoctors = useMemo(() => {
+    let result = doctors;
+
+    if (speciality) {
+      result = result.filter(
+        (doc) => doc.speciality.toLowerCase() === speciality.toLowerCase()
+      );
+    }
+
+    if (searchQuery.trim()) {
+      result = result.filter((doc) =>
+        doc.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    return result;
+  }, [doctors, speciality, searchQuery]);
 
   return (
-    <div className="fixed w-full min-h-screen h-screen overflow-hidden">
-      {/* Input Bar and Filter Button */}
-      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-10 w-full flex flex-col sm:flex-row items-center justify-center gap-4">
-        <div className="relative w-80 md:w-96 max-w-lg flex items-center justify-center">
-          <input
-            type="text"
-            placeholder="Search doctor name"
-            className="w-full px-2 py-2 pr-10 border border-gray-300 rounded-l-md bg-white shadow-md focus:outline-none focus:ring-2 focus:ring-black"
-          />
-          {/* Filter Button */}
-          <Button
-            className="bg-white hover:bg-gray-100 text-gray-500 text-xl rounded-md p-2 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 ml-2"
-            onClick={() => setShowFilter(true)}
-          >
-            <MdFilterList />
-          </Button>
-        </div>
-      </div>
+    <div className="md:mx-10 mx-5 mt-4">
+      {/* Search Bar & Filter */}
+      <div className="flex items-center justify-center md:justify-start gap-4">
+  <div className="relative w-full md:w-96 flex">
+    <input
+      type="text"
+      placeholder="Search doctor by name..."
+      className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+      value={searchQuery}
+      onChange={(e) => setSearchQuery(e.target.value)}
+    />
+    <Button
+      className="bg-white hover:bg-gray-100 text-gray-700 text-xl rounded-lg p-2 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 ml-2"
+      onClick={() => setShowFilter(true)}
+    >
+      <MdFilterList />
+    </Button>
+  </div>
+</div>
 
-      {/* Material Tailwind Dialog */}
+      {/* Filter Dialog */}
       <Dialog open={showFilter} handler={() => setShowFilter(false)}>
         <DialogHeader>Filter by Speciality</DialogHeader>
         <DialogBody>
           <div className="flex flex-col gap-2">
-            {[
-              "General physician",
-              "Gynecologist",
-              "Dermatologist",
-              "Pediatricians",
-              "Neurologist",
-              "Gastroenterologist",
-            ].map((specialityOption) => (
+            {specialities.map((specialityOption) => (
               <p
                 key={specialityOption}
                 onClick={() =>
@@ -63,8 +75,10 @@ function Doctors() {
                     ? navigate("/doctors")
                     : navigate(`/doctors/${specialityOption}`)
                 }
-                className={`cursor-pointer p-2 border rounded ${
-                  speciality === specialityOption ? "bg-indigo-100" : ""
+                className={`cursor-pointer p-2 border rounded-md transition-all ${
+                  speciality?.toLowerCase() === specialityOption.toLowerCase()
+                    ? "bg-indigo-100 font-semibold"
+                    : "hover:bg-gray-100"
                 }`}
               >
                 {specialityOption}
@@ -76,25 +90,61 @@ function Doctors() {
           <Button
             color="red"
             onClick={() => setShowFilter(false)}
-            className="mr-2 bg-primary"
+            className="bg-primary text-white px-4 py-2 rounded-lg"
           >
             Close
           </Button>
         </DialogFooter>
       </Dialog>
 
-      {/* Google Map */}
-      <iframe
-        className="w-full h-full"
-        frameBorder="0"
-        scrolling="no"
-        marginHeight="0"
-        marginWidth="0"
-        src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=perinthalmanna&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
-        title="Google Map"
-      ></iframe>
+      {/* Doctor Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-10">
+        {filteredDoctors.length > 0 ? (
+          filteredDoctors.map((item) => (
+            <Card
+              key={item._id}
+              onClick={() => {
+                navigate(`/appointment/${item._id}`);
+                window.scrollTo(0, 0);
+              }}
+              className="border border-[#C9D8FF] rounded-xl overflow-hidden cursor-pointer hover:-translate-y-2 transition-transform duration-300 bg-white shadow-md"
+            >
+              <img
+                className="w-full h-60 object-cover bg-[#EAEFFF] hover:bg-primary transition-all"
+                src={item.image}
+                alt={item.name}
+              />
+              <CardBody>
+                <div
+                  className={`flex items-center gap-2 text-sm text-center ${
+                    item.available ? "text-green-500" : "text-gray-500"
+                  }`}
+                >
+                  <p
+                    className={`w-2 h-2 rounded-full ${
+                      item.available ? "bg-green-500" : "bg-gray-500"
+                    }`}
+                  ></p>
+                  <p>{item.available ? "Available" : "Not Available"}</p>
+                </div>
+                <p className="text-[#262626] text-lg font-semibold">{item.name}</p>
+                <p className="text-[#5C5C5C] text-sm">{item.speciality}</p>
+              </CardBody>
+            </Card>
+          ))
+        ) : (
+          <div className="col-span-3 flex flex-col items-center gap-3 text-gray-600 mt-10">
+            <img
+              src="/images/no-doctors.png"
+              alt="No doctors found"
+              className="w-40 opacity-70"
+            />
+            <p className="text-lg font-medium">No doctors found.</p>
+          </div>
+        )}
+      </div>
     </div>
   );
-}
+};
 
 export default Doctors;
