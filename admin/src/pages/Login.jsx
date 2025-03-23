@@ -3,13 +3,15 @@ import React, { useContext, useState } from 'react'
 import { DoctorContext } from '../context/DoctorContext'
 import { AdminContext } from '../context/AdminContext'
 import { toast } from 'react-toastify'
-
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 const Login = () => {
 
   const [state, setState] = useState('Admin')
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false);
+
 
   const backendUrl = import.meta.env.VITE_BACKEND_URL
 
@@ -51,10 +53,24 @@ const Login = () => {
           <p>Email</p>
           <input onChange={(e) => setEmail(e.target.value)} value={email} className='border border-[#DADADA] rounded w-full p-2 mt-1' type="email" required />
         </div>
-        <div className='w-full '>
-          <p>Password</p>
-          <input onChange={(e) => setPassword(e.target.value)} value={password} className='border border-[#DADADA] rounded w-full p-2 mt-1' type="password" required />
-        </div>
+        <div className="relative w-full">
+  <p>Password</p>
+  <input 
+    onChange={(e) => setPassword(e.target.value)}  
+    type={showPassword ? "text" : "password"} 
+    value={password}  
+    className="border border-[#DADADA] rounded w-full p-2 mt-1 pr-10" 
+    required 
+  />
+  <button
+    type="button"
+    onClick={() => setShowPassword((prev) => !prev)}
+    className="absolute right-3 top-10 transform -translate-y-1/2 text-gray-500"
+  >
+    {showPassword ? <FaEyeSlash /> : <FaEye />}
+  </button>
+</div>
+
         <button className='bg-primary text-white w-full py-2 rounded-md text-base'>Login</button>
         {
           state === 'Admin'

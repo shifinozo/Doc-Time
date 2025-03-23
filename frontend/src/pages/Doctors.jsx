@@ -110,7 +110,7 @@ const Doctors = () => {
               className="border border-[#C9D8FF] rounded-xl overflow-hidden cursor-pointer hover:-translate-y-2 transition-transform duration-300 bg-white shadow-md"
             >
               <img
-                className="w-full h-60 object-cover bg-[#EAEFFF] hover:bg-primary transition-all"
+                className="w-full h-72 object-cover bg-[#EAEFFF] hover:bg-primary transition-all"
                 src={item.image}
                 alt={item.name}
               />

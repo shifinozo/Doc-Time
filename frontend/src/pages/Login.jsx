@@ -3,7 +3,7 @@ import { AppContext } from "../context/AppContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { assets } from '../assets/assets';
+import { assets } from "../assets/assets";
 import {
   Card,
   Input,
@@ -11,9 +11,11 @@ import {
   Button,
   Typography,
 } from "@material-tailwind/react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
   const [formState, setFormState] = useState("Sign Up"); // Renamed for clarity
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -37,9 +39,7 @@ const Login = () => {
       formState === "Sign Up" ? "/api/user/register" : "/api/user/login";
 
     const payload =
-      formState === "Sign Up"
-        ? { name, email, password }
-        : { email, password };
+      formState === "Sign Up" ? { name, email, password } : { email, password };
 
     try {
       const { data } = await axios.post(backendUrl + endpoint, payload);
@@ -66,7 +66,6 @@ const Login = () => {
     { src: assets.Google, alt: "Google" },
     { src: assets.FaceBook, alt: "Facebook" },
     { src: assets.Apple, alt: "Apple" },
-   
   ];
 
   return (
@@ -74,7 +73,7 @@ const Login = () => {
       <Typography variant="h3" className="text-center font-bold text-primary">
         {formState === "Sign Up" ? "Create Account" : "Login"}
       </Typography>
-      <Typography  className="mt-1 text-sm text-center font-normal text-gray-700">
+      <Typography className="mt-1 text-sm text-center font-normal text-gray-700">
         {formState === "Sign Up"
           ? "Nice to meet you! Enter your details to register."
           : "Welcome back! Please log in to continue."}
@@ -100,14 +99,24 @@ const Login = () => {
           required
         />
         <Input
+          type={showPassword ? "text" : "password"}
           label="Password"
           size="lg"
-          type="password"
           name="password"
           value={password}
           onChange={handleInputChange}
           required
+          icon={
+            <button
+              type="button"
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </button>
+          }
         />
+
         {formState === "Sign Up" && (
           <Checkbox
             label={
