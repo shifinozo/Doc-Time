@@ -1,12 +1,10 @@
-import React from "react"
-import { assets } from "../assets/assets"
+import React from "react";
+import { assets } from "../assets/assets";
 
 const Contact = () => {
   return (
-    <div>
-   
-
-      <div className="text-center text-2xl pt-10 text-gray-500 dark:text-gray-200 mx-5">
+    <div className="flex flex-col items-center justify-center h-min-screen">
+      <div className="text-center text-2xl pt-10 text-gray-500 dark:text-gray-200 ">
         <p>
           CONTACT{" "}
           <span className="text-gray-700 dark:text-gray-600 font-semibold">
@@ -17,7 +15,7 @@ const Contact = () => {
 
       <div className="my-10 flex flex-col justify-center md:flex-row gap-10 mb-28 text-sm">
         <img
-          className="w-full md:max-w-[360px] rounded-lg"
+          className="w-[320px] md:max-w-[360px] rounded-lg"
           src={assets.contact_image}
           alt=""
         />
@@ -27,7 +25,7 @@ const Contact = () => {
             Our Office
           </p>
           <p className="text-gray-500 dark:text-gray-400">
-             <br />
+            <br />
             India
           </p>
           <p className="text-gray-500 dark:text-gray-400">
@@ -45,9 +43,8 @@ const Contact = () => {
           </button>
         </div>
       </div>
-    
     </div>
-  )
-}
+  );
+};
 
-export default Contact
+export default Contact;
